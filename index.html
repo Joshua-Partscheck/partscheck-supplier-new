@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Portal</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f4f5f7; color: #1a1a2e; min-height: 100vh; }
+
+  /* TOP BAR */
+  .topbar { background: #1a1a2e; height: 48px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; }
+  .topbar-brand { color: #fff; font-size: 15px; font-weight: 600; letter-spacing: 0.3px; display: flex; align-items: center; gap: 8px; }
+  .brand-dot { width: 8px; height: 8px; border-radius: 50%; background: #4f8ef7; }
+  .topbar-right { display: flex; align-items: center; gap: 16px; }
+  .topbar-right .notif { position: relative; cursor: pointer; }
+  .notif-icon { width: 20px; height: 20px; fill: #8899aa; }
+  .notif-badge { position: absolute; top: -4px; right: -4px; background: #e24b4a; color: #fff; font-size: 9px; font-weight: 600; border-radius: 50%; width: 14px; height: 14px; display: flex; align-items: center; justify-content: center; }
+  .user-pill { display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 4px 10px 4px 4px; border-radius: 20px; border: 0.5px solid rgba(255,255,255,0.15); transition: background 0.15s; }
+  .user-pill:hover { background: rgba(255,255,255,0.08); }
+  .avatar { width: 28px; height: 28px; border-radius: 50%; background: #185FA5; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: #B5D4F4; }
+  .user-name { font-size: 13px; color: #d0d8e8; font-weight: 500; }
+  .chevron-down { color: #8899aa; font-size: 10px; }
+
+  /* NAV */
+  .navbar { background: #fff; border-bottom: 1px solid #e2e5ea; display: flex; align-items: stretch; padding: 0 24px; position: sticky; top: 0; z-index: 100; }
+  .nav-item { position: relative; display: flex; align-items: center; gap: 6px; padding: 0 16px; height: 52px; font-size: 13.5px; font-weight: 500; color: #4a5568; cursor: pointer; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; white-space: nowrap; }
+  .nav-item:hover { color: #185FA5; }
+  .nav-item.active { color: #185FA5; border-bottom-color: #185FA5; }
+  .nav-icon { width: 15px; height: 15px; opacity: 0.7; }
+  .nav-item.active .nav-icon { opacity: 1; }
+  .nav-item .caret { font-size: 9px; color: #a0aec0; margin-left: 2px; transition: transform 0.15s; }
+  .nav-item:hover .caret { color: #185FA5; }
+
+  /* DROPDOWN */
+  .dropdown { display: none; position: absolute; top: calc(100% + 1px); left: 0; background: #fff; border: 0.5px solid #e2e5ea; border-radius: 8px; padding: 6px 0; min-width: 200px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); z-index: 200; }
+  .nav-item:hover .dropdown { display: block; }
+  .dropdown a { display: flex; align-items: center; gap: 10px; padding: 9px 16px; font-size: 13px; color: #4a5568; text-decoration: none; transition: background 0.12s; }
+  .dropdown a:hover { background: #f0f4ff; color: #185FA5; }
+  .dropdown-divider { height: 0.5px; background: #e2e5ea; margin: 4px 0; }
+  .badge-new { background: #e6f1fb; color: #185FA5; font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px; }
+
+  /* PAGE CONTENT */
+  .page { padding: 28px 24px; }
+  .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+  .page-title { font-size: 20px; font-weight: 600; color: #1a1a2e; }
+  .page-sub { font-size: 13px; color: #718096; margin-top: 2px; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; font-size: 13px; font-weight: 500; border-radius: 7px; border: none; cursor: pointer; transition: all 0.15s; }
+  .btn-primary { background: #185FA5; color: #fff; }
+  .btn-primary:hover { background: #0C447C; }
+  .btn-outline { background: #fff; color: #4a5568; border: 0.5px solid #d0d5dd; }
+  .btn-outline:hover { background: #f8fafc; }
+
+  /* STATS */
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }
+  .stat-card { background: #fff; border-radius: 10px; border: 0.5px solid #e2e5ea; padding: 16px 18px; }
+  .stat-label { font-size: 12px; color: #718096; font-weight: 500; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 8px; }
+  .stat-value { font-size: 26px; font-weight: 600; color: #1a1a2e; line-height: 1; }
+  .stat-delta { font-size: 12px; margin-top: 6px; display: flex; align-items: center; gap: 4px; }
+  .delta-up { color: #3B6D11; }
+  .delta-down { color: #993C1D; }
+  .stat-accent { width: 3px; height: 40px; border-radius: 2px; position: absolute; left: 0; top: 50%; transform: translateY(-50%); }
+  .stat-card { position: relative; }
+
+  /* TABLE */
+  .card { background: #fff; border-radius: 10px; border: 0.5px solid #e2e5ea; overflow: hidden; }
+  .card-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 0.5px solid #e2e5ea; }
+  .card-title { font-size: 14px; font-weight: 600; color: #1a1a2e; }
+  .filter-row { display: flex; gap: 8px; }
+  .filter-btn { padding: 5px 12px; font-size: 12px; border-radius: 6px; border: 0.5px solid #d0d5dd; background: #fff; color: #718096; cursor: pointer; transition: all 0.12s; }
+  .filter-btn.active { background: #e6f1fb; color: #185FA5; border-color: #b5d4f4; font-weight: 500; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead tr { background: #f8fafc; }
+  th { padding: 10px 16px; text-align: left; font-size: 11.5px; font-weight: 600; color: #718096; text-transform: uppercase; letter-spacing: 0.4px; border-bottom: 0.5px solid #e2e5ea; }
+  td { padding: 13px 16px; border-bottom: 0.5px solid #f0f2f5; color: #2d3748; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fafbff; }
+  .status-pill { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 20px; font-size: 11.5px; font-weight: 500; }
+  .s-approved { background: #EAF3DE; color: #3B6D11; }
+  .s-pending { background: #FAEEDA; color: #854F0B; }
+  .s-declined { background: #FCEBEB; color: #A32D2D; }
+  .s-review { background: #E6F1FB; color: #185FA5; }
+  .company-cell { display: flex; align-items: center; gap: 10px; }
+  .co-avatar { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
+  .action-link { color: #185FA5; font-size: 12px; cursor: pointer; text-decoration: none; }
+  .action-link:hover { text-decoration: underline; }
+
+  /* QUICK ACCESS */
+  .two-col { display: grid; grid-template-columns: 1fr 340px; gap: 14px; margin-top: 14px; }
+  .quick-list { list-style: none; }
+  .quick-list li { display: flex; align-items: center; justify-content: space-between; padding: 11px 0; border-bottom: 0.5px solid #f0f2f5; font-size: 13px; color: #4a5568; }
+  .quick-list li:last-child { border-bottom: none; }
+  .quick-badge { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<!-- TOP IDENTITY BAR -->
+<div class="topbar">
+  <div class="topbar-brand">
+    <div class="brand-dot"></div>
+    Nexus Commerce
+  </div>
+  <div class="topbar-right">
+    <div class="notif">
+      <svg class="notif-icon" viewBox="0 0 20 20"><path d="M10 2a6 6 0 00-6 6v2.586l-1.707 1.707A1 1 0 003 14h14a1 1 0 00.707-1.707L16 10.586V8a6 6 0 00-6-6zM10 18a2 2 0 01-2-2h4a2 2 0 01-2 2z"/></svg>
+      <div class="notif-badge">4</div>
+    </div>
+    <div class="user-pill">
+      <div class="avatar">JM</div>
+      <span class="user-name">Jordan Mills</span>
+      <span class="chevron-down">▾</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN NAV -->
+<nav class="navbar">
+
+  <div class="nav-item active" onclick="showPage('quotes')">
+    <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 6h6M5 9h4"/></svg>
+    Quotes
+    <span class="caret">▾</span>
+    <div class="dropdown">
+      <a href="#">New Quote</a>
+      <a href="#">Active Quotes</a>
+      <a href="#">Quote Templates</a>
+      <div class="dropdown-divider"></div>
+      <a href="#">Archived</a>
+    </div>
+  </div>
+
+  <div class="nav-item" onclick="showPage('orders')">
+    <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h12l-1.5 8H3.5L2 3z"/><circle cx="6" cy="14" r="1"/><circle cx="11" cy="14" r="1"/></svg>
+    My Orders
+    <span class="caret">▾</span>
+    <div class="dropdown">
+      <a href="#">All Orders</a>
+      <a href="#">Open Orders</a>
+      <a href="#">Shipment Tracking</a>
+      <div class="dropdown-divider"></div>
+      <a href="#">Returns &amp; Disputes</a>
+    </div>
+  </div>
+
+  <div class="nav-item" onclick="showPage('credit')">
+    <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="14" height="9" rx="2"/><path d="M1 7h14"/><path d="M4 10.5h2"/></svg>
+    Credit Management
+    <span class="caret">▾</span>
+    <div class="dropdown">
+      <a href="#">Credit Overview</a>
+      <a href="#">Credit Applications <span class="badge-new">New</span></a>
+      <a href="#">Payment Terms</a>
+      <div class="dropdown-divider"></div>
+      <a href="#">Statements</a>
+    </div>
+  </div>
+
+  <div class="nav-item" onclick="showPage('reports')">
+    <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="10" width="3" height="4"/><rect x="6.5" y="6" width="3" height="8"/><rect x="11" y="2" width="3" height="12"/></svg>
+    Reports
+    <span class="caret">▾</span>
+    <div class="dropdown">
+      <a href="#">Sales Summary</a>
+      <a href="#">Order Analytics</a>
+      <a href="#">Credit Reports</a>
+      <div class="dropdown-divider"></div>
+      <a href="#">Schedule Export</a>
+    </div>
+  </div>
+
+  <div class="nav-item" onclick="showPage('tools')">
+    <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2l-1 1-3 3 1 1 3-3 1-1-1-1zM2 13l1-1 3-3-1-1-3 3-1 1 1 1z"/><path d="M5 5l6 6"/></svg>
+    Tools
+    <span class="caret">▾</span>
+    <div class="dropdown">
+      <a href="#">Price Calculator</a>
+      <a href="#">Product Configurator</a>
+      <a href="#">Import / Export</a>
+      <div class="dropdown-divider"></div>
+      <a href="#">API Access</a>
+    </div>
+  </div>
+
+</nav>
+
+<!-- PAGE CONTENT -->
+<div class="page" id="page-quotes">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Quotes</div>
+      <div class="page-sub">Manage and track all your open and historical quotes</div>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <button class="btn btn-outline">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3v10M3 8h10"/></svg>
+        Import
+      </button>
+      <button class="btn btn-primary">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3v10M3 8h10"/></svg>
+        New Quote
+      </button>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#185FA5;border-radius:0 2px 2px 0;"></div><div class="stat-label">Active Quotes</div><div class="stat-value">24</div><div class="stat-delta delta-up">↑ 3 this week</div></div>
+    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#3B6D11;border-radius:0 2px 2px 0;"></div><div class="stat-label">Quote Value</div><div class="stat-value">$184k</div><div class="stat-delta delta-up">↑ 12% vs last mo</div></div>
+    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#854F0B;border-radius:0 2px 2px 0;"></div><div class="stat-label">Expiring Soon</div><div class="stat-value">6</div><div class="stat-delta delta-down">↓ 2 expire today</div></div>
+    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#534AB7;border-radius:0 2px 2px 0;"></div><div class="stat-label">Win Rate</div><div class="stat-value">68%</div><div class="stat-delta delta-up">↑ 4pts vs Q2</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Recent Quotes</div>
+      <div class="filter-row">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn">Pending</button>
+        <button class="filter-btn">Approved</button>
+        <button class="filter-btn">Expired</button>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>Quote #</th><th>Customer</th><th>Items</th><th>Total</th><th>Expires</th><th>Status</th><th></th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:600;color:#185FA5;">#QT-4821</td>
+          <td><div class="company-cell"><div class="co-avatar" style="background:#E6F1FB;color:#185FA5;">AC</div>Acme Corp</div></td>
+          <td>12</td><td>$34,200</td><td>Apr 15, 2026</td>
+          <td><span class="status-pill s-pending">Pending</span></td>
+          <td><a class="action-link">View →</a></td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#185FA5;">#QT-4820</td>
+          <td><div class="company-cell"><div class="co-avatar" style="background:#E1F5EE;color:#0F6E56;">BG</div>Blue Giant LLC</div></td>
+          <td>4</td><td>$8,750</td><td>Apr 10, 2026</td>
+          <td><span class="status-pill s-approved">Approved</span></td>
+          <td><a class="action-link">View →</a></td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#185FA5;">#QT-4818</td>
+          <td><div class="company-cell"><div class="co-avatar" style="background:#FAEEDA;color:#854F0B;">NX</div>Nexaflow Inc</div></td>
+          <td>7</td><td>$21,000</td><td>Apr 5, 2026</td>
+          <td><span class="status-pill s-review">In Review</span></td>
+          <td><a class="action-link">View →</a></td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#185FA5;">#QT-4815</td>
+          <td><div class="company-cell"><div class="co-avatar" style="background:#EEEDFE;color:#534AB7;">PW</div>Pinnacle Works</div></td>
+          <td>18</td><td>$67,900</td><td>Mar 30, 2026</td>
+          <td><span class="status-pill s-declined">Declined</span></td>
+          <td><a class="action-link">View →</a></td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#185FA5;">#QT-4812</td>
+          <td><div class="company-cell"><div class="co-avatar" style="background:#FBEAF0;color:#993556;">ST</div>Stellar Tech</div></td>
+          <td>3</td><td>$5,100</td><td>Apr 20, 2026</td>
+          <td><span class="status-pill s-approved">Approved</span></td>
+          <td><a class="action-link">View →</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-header"><div class="card-title">Expiring Quotes</div><a class="action-link">See all</a></div>
+      <div style="padding:0 20px;">
+        <ul class="quick-list">
+          <li><span>#QT-4805 — Meridian Co.</span><span class="quick-badge" style="background:#FCEBEB;color:#A32D2D;">Today</span></li>
+          <li><span>#QT-4808 — Vortex Ltd.</span><span class="quick-badge" style="background:#FAEEDA;color:#854F0B;">2 days</span></li>
+          <li><span>#QT-4811 — SkyBridge</span><span class="quick-badge" style="background:#FAEEDA;color:#854F0B;">4 days</span></li>
+          <li><span>#QT-4814 — Orion Grp.</span><span class="quick-badge" style="background:#EAF3DE;color:#3B6D11;">7 days</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Quick Actions</div></div>
+      <div style="padding:16px 20px;display:flex;flex-direction:column;gap:8px;">
+        <button class="btn btn-outline" style="justify-content:flex-start;width:100%;">+ Create from template</button>
+        <button class="btn btn-outline" style="justify-content:flex-start;width:100%;">↓ Download quote PDF</button>
+        <button class="btn btn-outline" style="justify-content:flex-start;width:100%;">⟳ Clone last quote</button>
+        <button class="btn btn-outline" style="justify-content:flex-start;width:100%;">✉ Email to customer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-orders" style="display:none">
+  <div class="page-header">
+    <div><div class="page-title">My Orders</div><div class="page-sub">Track all purchase orders and shipments</div></div>
+    <button class="btn btn-primary">+ New Order</button>
+  </div>
+  <div class="stats-row">
+    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#185FA5;border-radius:0 2px 2px 0;"></div><div class="stat-label">Open Orders</div><div class="stat-value">37</div></div>
+    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#3B6D11;border-radius:0 2px 2px 0;"></div><div class="stat-label">Shipped</div><div class="stat-value">12</div></div>
+    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#854F0B;border-radius:0 2px 2px 0;"></div><div class="stat-label">Awaiting</div><div class="stat-value">8</div></div>
+    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#534AB7;border-radius:0 2px 2px 0;"></div><div class="stat-label">Month Spend</div><div class="stat-value">$92k</div></div>
+  </div>
+  <div class="card"><div class="card-header"><div class="card-title">Order History</div></div>
+    <table><thead><tr><th>Order #</th><th>Customer</th><th>Date</th><th>Total</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:600;color:#185FA5;">#PO-9910</td><td>Acme Corp</td><td>Mar 28, 2026</td><td>$12,400</td><td><span class="status-pill s-approved">Shipped</span></td><td><a class="action-link">Track →</a></td></tr>
+      <tr><td style="font-weight:600;color:#185FA5;">#PO-9908</td><td>Blue Giant LLC</td><td>Mar 25, 2026</td><td>$6,200</td><td><span class="status-pill s-pending">Processing</span></td><td><a class="action-link">Track →</a></td></tr>
+      <tr><td style="font-weight:600;color:#185FA5;">#PO-9905</td><td>Nexaflow Inc</td><td>Mar 20, 2026</td><td>$18,750</td><td><span class="status-pill s-review">In Transit</span></td><td><a class="action-link">Track →</a></td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<div class="page" id="page-credit" style="display:none">
+  <div class="page-header">
+    <div><div class="page-title">Credit Management</div><div class="page-sub">Monitor credit lines, balances, and applications</div></div>
+    <button class="btn btn-primary">+ New Application</button>
+  </div>
+  <div class="stats-row">
+    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#185FA5;border-radius:0 2px 2px 0;"></div><div class="stat-label">Total Credit Line</div><div class="stat-value">$500k</div></div>
+    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#e24b4a;border-radius:0 2px 2px 0;"></div><div class="stat-label">Used Credit</div><div class="stat-value">$213k</div></div>
+    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#3B6D11;border-radius:0 2px 2px 0;"></div><div class="stat-label">Available</div><div class="stat-value">$287k</div></div>
+    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#854F0B;border-radius:0 2px 2px 0;"></div><div class="stat-label">Overdue Balance</div><div class="stat-value">$4.2k</div></div>
+  </div>
+  <div class="card"><div class="card-header"><div class="card-title">Credit Applications</div></div>
+    <table><thead><tr><th>App #</th><th>Company</th><th>Amount</th><th>Submitted</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:600;">#CR-221</td><td>Acme Corp</td><td>$100,000</td><td>Mar 22, 2026</td><td><span class="status-pill s-review">Under Review</span></td><td><a class="action-link">View →</a></td></tr>
+      <tr><td style="font-weight:600;">#CR-220</td><td>Vortex Ltd</td><td>$50,000</td><td>Mar 15, 2026</td><td><span class="status-pill s-approved">Approved</span></td><td><a class="action-link">View →</a></td></tr>
+      <tr><td style="font-weight:600;">#CR-219</td><td>SkyBridge</td><td>$75,000</td><td>Mar 8, 2026</td><td><span class="status-pill s-declined">Declined</span></td><td><a class="action-link">View →</a></td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<div class="page" id="page-reports" style="display:none">
+  <div class="page-header">
+    <div><div class="page-title">Reports</div><div class="page-sub">Analytics, exports, and scheduled reports</div></div>
+    <button class="btn btn-primary">+ Schedule Report</button>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+    <div class="card" style="padding:20px;cursor:pointer;"><div style="font-size:22px;margin-bottom:10px;">📊</div><div style="font-weight:600;margin-bottom:4px;">Sales Summary</div><div style="font-size:12px;color:#718096;">Monthly and YTD revenue breakdowns</div></div>
+    <div class="card" style="padding:20px;cursor:pointer;"><div style="font-size:22px;margin-bottom:10px;">📦</div><div style="font-weight:600;margin-bottom:4px;">Order Analytics</div><div style="font-size:12px;color:#718096;">Volume, fulfillment, and returns</div></div>
+    <div class="card" style="padding:20px;cursor:pointer;"><div style="font-size:22px;margin-bottom:10px;">💳</div><div style="font-weight:600;margin-bottom:4px;">Credit Reports</div><div style="font-size:12px;color:#718096;">Credit utilization and aging</div></div>
+    <div class="card" style="padding:20px;cursor:pointer;"><div style="font-size:22px;margin-bottom:10px;">📈</div><div style="font-weight:600;margin-bottom:4px;">Quote Conversion</div><div style="font-size:12px;color:#718096;">Win/loss and pipeline reports</div></div>
+    <div class="card" style="padding:20px;cursor:pointer;"><div style="font-size:22px;margin-bottom:10px;">🧾</div><div style="font-weight:600;margin-bottom:4px;">Invoicing</div><div style="font-size:12px;color:#718096;">Outstanding and paid invoices</div></div>
+    <div class="card" style="padding:20px;cursor:pointer;"><div style="font-size:22px;margin-bottom:10px;">📤</div><div style="font-weight:600;margin-bottom:4px;">Export Center</div><div style="font-size:12px;color:#718096;">Download CSV / Excel / PDF</div></div>
+  </div>
+</div>
+
+<div class="page" id="page-tools" style="display:none">
+  <div class="page-header">
+    <div><div class="page-title">Tools</div><div class="page-sub">Calculators, configurators, and integrations</div></div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;">
+    <div class="card" style="padding:20px;cursor:pointer;display:flex;align-items:flex-start;gap:14px;"><div style="width:40px;height:40px;border-radius:8px;background:#E6F1FB;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🧮</div><div><div style="font-weight:600;margin-bottom:4px;">Price Calculator</div><div style="font-size:12px;color:#718096;">Compute pricing with volume discounts and freight</div></div></div>
+    <div class="card" style="padding:20px;cursor:pointer;display:flex;align-items:flex-start;gap:14px;"><div style="width:40px;height:40px;border-radius:8px;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">⚙️</div><div><div style="font-weight:600;margin-bottom:4px;">Product Configurator</div><div style="font-size:12px;color:#718096;">Build custom SKUs with options and specs</div></div></div>
+    <div class="card" style="padding:20px;cursor:pointer;display:flex;align-items:flex-start;gap:14px;"><div style="width:40px;height:40px;border-radius:8px;background:#FAEEDA;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📥</div><div><div style="font-weight:600;margin-bottom:4px;">Import / Export</div><div style="font-size:12px;color:#718096;">Bulk upload orders, products, and customer data</div></div></div>
+    <div class="card" style="padding:20px;cursor:pointer;display:flex;align-items:flex-start;gap:14px;"><div style="width:40px;height:40px;border-radius:8px;background:#EEEDFE;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🔌</div><div><div style="font-weight:600;margin-bottom:4px;">API Access</div><div style="font-size:12px;color:#718096;">Manage keys, webhooks, and integrations</div></div></div>
+  </div>
+</div>
+
+<script>
+function showPage(name) {
+  ['quotes','orders','credit','reports','tools'].forEach(p => {
+    document.getElementById('page-'+p).style.display = p===name?'block':'none';
+  });
+  document.querySelectorAll('.nav-item').forEach((el,i) => {
+    const pages = ['quotes','orders','credit','reports','tools'];
+    el.classList.toggle('active', pages[i]===name);
+  });
+}
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    this.closest('.filter-row').querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
