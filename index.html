@@ -4,41 +4,43 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Business Portal</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0..1,0" />
 <style>
+  .material-symbols-outlined { font-size: 18px; vertical-align: middle; }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f4f5f7; color: #1a1a2e; min-height: 100vh; }
+  body { font-family: 'Open Sans', sans-serif; background: #f4f5f7; color: #1a1a2e; min-height: 100vh; }
 
   /* TOP BAR */
-  .topbar { background: #1a1a2e; height: 48px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; }
+  .topbar { background: #242625; height: 48px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; position: sticky; top: 0; z-index: 100; }
   .topbar-brand { color: #fff; font-size: 15px; font-weight: 600; letter-spacing: 0.3px; display: flex; align-items: center; gap: 8px; }
   .brand-dot { width: 8px; height: 8px; border-radius: 50%; background: #4f8ef7; }
   .topbar-right { display: flex; align-items: center; gap: 16px; }
   .topbar-right .notif { position: relative; cursor: pointer; }
-  .notif-icon { width: 20px; height: 20px; fill: #8899aa; }
-  .notif-badge { position: absolute; top: -4px; right: -4px; background: #e24b4a; color: #fff; font-size: 9px; font-weight: 600; border-radius: 50%; width: 14px; height: 14px; display: flex; align-items: center; justify-content: center; }
+  .notif-icon { font-size: 20px; color: rgba(255,255,255,0.75); }
+  .notif-badge { position: absolute; top: -4px; right: -4px; background: #e24b4a; color: #fff; font-size: 11px; font-weight: 700; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; }
   .user-pill { display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 4px 10px 4px 4px; border-radius: 20px; border: 0.5px solid rgba(255,255,255,0.15); transition: background 0.15s; }
   .user-pill:hover { background: rgba(255,255,255,0.08); }
-  .avatar { width: 28px; height: 28px; border-radius: 50%; background: #185FA5; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: #B5D4F4; }
+  .avatar { width: 28px; height: 28px; border-radius: 50%; background: #0db14b; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: #fff; }
   .user-name { font-size: 13px; color: #d0d8e8; font-weight: 500; }
   .chevron-down { color: #8899aa; font-size: 10px; }
 
   /* NAV */
-  .navbar { background: #fff; border-bottom: 1px solid #e2e5ea; display: flex; align-items: stretch; padding: 0 24px; position: sticky; top: 0; z-index: 100; }
+  .navbar { background: #fff; border-bottom: 1px solid #e2e5ea; display: flex; align-items: stretch; padding: 0 24px; position: sticky; top: 48px; z-index: 90; }
   .nav-item { position: relative; display: flex; align-items: center; gap: 6px; padding: 0 16px; height: 52px; font-size: 13.5px; font-weight: 500; color: #4a5568; cursor: pointer; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; white-space: nowrap; }
-  .nav-item:hover { color: #185FA5; }
-  .nav-item.active { color: #185FA5; border-bottom-color: #185FA5; }
-  .nav-icon { width: 15px; height: 15px; opacity: 0.7; }
+  .nav-item:hover { color: #0db14b; }
+  .nav-item.active { color: #0db14b; border-bottom-color: #0db14b; }
+  .nav-icon { font-size: 16px; opacity: 0.7; }
   .nav-item.active .nav-icon { opacity: 1; }
   .nav-item .caret { font-size: 9px; color: #a0aec0; margin-left: 2px; transition: transform 0.15s; }
-  .nav-item:hover .caret { color: #185FA5; }
+  .nav-item:hover .caret { color: #0db14b; }
 
   /* DROPDOWN */
   .dropdown { display: none; position: absolute; top: calc(100% + 1px); left: 0; background: #fff; border: 0.5px solid #e2e5ea; border-radius: 8px; padding: 6px 0; min-width: 200px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); z-index: 200; }
   .nav-item:hover .dropdown { display: block; }
   .dropdown a { display: flex; align-items: center; gap: 10px; padding: 9px 16px; font-size: 13px; color: #4a5568; text-decoration: none; transition: background 0.12s; }
-  .dropdown a:hover { background: #f0f4ff; color: #185FA5; }
+  .dropdown a:hover { background: #f0f4ff; color: #0db14b; }
   .dropdown-divider { height: 0.5px; background: #e2e5ea; margin: 4px 0; }
-  .badge-new { background: #e6f1fb; color: #185FA5; font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px; }
+  .badge-new { background: #e6f1fb; color: #0db14b; font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px; }
 
   /* PAGE CONTENT */
   .page { padding: 28px 24px; }
@@ -46,7 +48,7 @@
   .page-title { font-size: 20px; font-weight: 600; color: #1a1a2e; }
   .page-sub { font-size: 13px; color: #718096; margin-top: 2px; }
   .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; font-size: 13px; font-weight: 500; border-radius: 7px; border: none; cursor: pointer; transition: all 0.15s; }
-  .btn-primary { background: #185FA5; color: #fff; }
+  .btn-primary { background: #0db14b; color: #fff; }
   .btn-primary:hover { background: #0C447C; }
   .btn-outline { background: #fff; color: #4a5568; border: 0.5px solid #d0d5dd; }
   .btn-outline:hover { background: #f8fafc; }
@@ -67,22 +69,32 @@
   .card-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 0.5px solid #e2e5ea; }
   .card-title { font-size: 14px; font-weight: 600; color: #1a1a2e; }
   .filter-row { display: flex; gap: 8px; }
-  .filter-btn { padding: 5px 12px; font-size: 12px; border-radius: 6px; border: 0.5px solid #d0d5dd; background: #fff; color: #718096; cursor: pointer; transition: all 0.12s; }
-  .filter-btn.active { background: #e6f1fb; color: #185FA5; border-color: #b5d4f4; font-weight: 500; }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .filter-btn { padding: 0 14px; height: 30px; font-size: 12px; font-weight: 600; border: 1.5px solid #c4c9d0; background: #fff; color: #718096; cursor: pointer; transition: background 0.15s, color 0.15s, border-color 0.15s; display: inline-flex; align-items: center; border-radius: 50px; }
+  .filter-btn:hover { background: #e6f7ee; color: #0db14b; border-color: #0db14b; }
+  .filter-btn.active { background: #e6f7ee; color: #0db14b; border-color: #0db14b; }
+  .filter-btn span { background: #e8eaed !important; color: #4a5568 !important; }
+  .filter-btn.active span { background: #0db14b !important; color: #fff !important; }
+  .filter-btn:hover span { background: #0db14b !important; color: #fff !important; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; table-layout: fixed; }
   thead tr { background: #f8fafc; }
+  #quotes-thead th { background: #f8fafc; border-bottom: none; }
+  #quotes-table { border-collapse: separate; border-spacing: 0; }
+  #quotes-thead { transition: box-shadow 0.2s; }
+  #quotes-thead.scrolled { box-shadow: 0 2px 8px rgba(0,0,0,0.10); clip-path: inset(0 0 -10px 0); }
   th { padding: 10px 16px; text-align: left; font-size: 11.5px; font-weight: 600; color: #718096; text-transform: uppercase; letter-spacing: 0.4px; border-bottom: 0.5px solid #e2e5ea; }
   td { padding: 13px 16px; border-bottom: 0.5px solid #f0f2f5; color: #2d3748; }
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: #fafbff; }
   .status-pill { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 20px; font-size: 11.5px; font-weight: 500; }
-  .s-approved { background: #EAF3DE; color: #3B6D11; }
+  .s-approved { background: #e6f7ee; color: #0db14b; }
   .s-pending { background: #FAEEDA; color: #854F0B; }
   .s-declined { background: #FCEBEB; color: #A32D2D; }
-  .s-review { background: #E6F1FB; color: #185FA5; }
+  .s-review { background: #E6F1FB; color: #0db14b; }
+  .s-open { background: #EDE9FE; color: #6D28D9; }
+  .s-submitted { background: #FEF3C7; color: #92400E; }
   .company-cell { display: flex; align-items: center; gap: 10px; }
   .co-avatar { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
-  .action-link { color: #185FA5; font-size: 12px; cursor: pointer; text-decoration: none; }
+  .action-link { color: #0db14b; font-size: 12px; cursor: pointer; text-decoration: none; }
   .action-link:hover { text-decoration: underline; }
 
   /* QUICK ACCESS */
@@ -98,19 +110,33 @@
 <!-- TOP IDENTITY BAR -->
 <div class="topbar">
   <div class="topbar-brand">
-    <div class="brand-dot"></div>
-    Nexus Commerce
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="45 196 490 75" style="height:22px;width:auto;" aria-label="PartsCheck">
+      <defs><style>.lst0{fill:#57a84c}.lst1{fill:#0db14b}.lst2{fill:#fff}</style></defs>
+      <polygon class="lst0" points="111.5 263.3 102 258 102 258 55.7 253.8 50.4 263.3 111.5 263.3 111.5 263.3"/>
+      <polygon class="lst0" points="55.7 253.8 59.9 207.5 50.4 202.2 50.4 202.2 50.4 263.3 50.4 263.3 55.7 253.8 55.7 253.8"/>
+      <path class="lst1" d="M62.1,225.8c1.3-1.3,2.6-2.5,4.1-3.9,4.7,3.3,9.4,6.6,14.3,10.1.5-.7,1.1-1.3,1.6-2,8.3-10.6,17.7-20.2,28.5-28.4,2.7-2,5.3-2.1,8.7-1.8-16,15.5-27.4,33.9-38.6,52.5-6.2-8.8-12.3-17.6-18.6-26.6Z"/>
+      <path class="lst0" d="M59.9,207.5l34.5,3.1c3.1-3,6.2-5.8,9.4-8.5h-53.5l9.5,5.3h0Z"/>
+      <path class="lst0" d="M105.3,221.6l-3.3,36.4,9.5,5.3v-49.5c-2.1,2.5-4.2,5.2-6.2,7.8Z"/>
+      <path class="lst2" d="M149.7,247.6h-8.3v14.7h-10.9v-48.5h19.8c11.8,0,16.2,4.7,16.2,13.8v6.3c0,9.1-5,13.7-16.8,13.7ZM155.5,228.5c0-3.5-1.2-5.1-5.8-5.1h-8.3v14.6h8.3c4.8,0,5.8-1.8,5.8-5.3v-4.2Z"/>
+      <path class="lst2" d="M210.4,262.3h-11.4l-2.6-9.5h-16.3l-2.6,9.5h-11.4l14.8-48.5h14.6l14.9,48.5ZM182.6,243.7h11.1l-5.5-20.3-5.6,20.3Z"/>
+      <path class="lst2" d="M232.8,247.2h-6.4v15.1h-10.9v-48.5h20.2c11.8,0,16.2,4.7,16.2,13.8v6c0,6-2.2,10.1-7.1,12.2l11.7,16.6h-13l-10.7-15.1ZM240.9,228.5c0-3.6-1.4-5.1-5.8-5.1h-8.7v14.3h8.7c4.7,0,5.8-1.7,5.8-5.3v-3.9Z"/>
+      <path class="lst2" d="M281.3,223.4v38.8h-10.9v-38.8h-13v-9.7h37v9.7h-13Z"/>
+      <path class="lst2" d="M313.9,263c-5.6,0-11.5-1.2-15.7-3.1l1.8-8.5c4.4,1.4,9,2.3,14,2.3s6.7-1.1,6.7-5.2-.2-4.9-8.2-6.6c-11.7-2.6-13.5-4.9-13.5-15.4s3.4-13.6,16.8-13.6,9.3.4,14.7,1.6l-1.1,9.2c-5.5-.9-9.1-1.4-13.5-1.4s-6,.9-6,4.4.2,4.7,7.9,6.6c13.1,3.1,13.8,5.7,13.8,15.2s-3.1,14.4-17.8,14.4Z"/>
+      <path class="lst1" d="M348.2,246.4c0,4.2,1.4,6.7,6.8,6.7s8.3-.4,12.5-1.2l1.5,9.5c-4.8,1-9.2,1.5-14.1,1.5-12.2,0-17.7-6-17.7-14.9v-20.3c0-8.8,5.5-14.9,17.7-14.9s9.3.5,14.1,1.5l-1.5,9.5c-4.2-.7-9-1.2-12.5-1.2-5.4,0-6.8,2.5-6.8,6.7v16.8Z"/>
+      <path class="lst1" d="M401.4,262.3v-19.5h-15.7v19.5h-10.9v-48.5h10.9v19.3h15.7v-19.3h10.9v48.5h-10.9Z"/>
+      <path class="lst1" d="M419.9,262.3v-48.5h30.5v9.7h-19.6v8.9h18.1v9.7h-18.1v10.6h19.6v9.7h-30.5Z"/>
+      <path class="lst1" d="M467.1,246.4c0,4.2,1.4,6.7,6.8,6.7s8.3-.4,12.5-1.2l1.5,9.5c-4.8,1-9.2,1.5-14.1,1.5-12.2,0-17.7-6-17.7-14.9v-20.3c0-8.8,5.5-14.9,17.7-14.9s9.3.5,14.1,1.5l-1.5,9.5c-4.2-.7-9-1.2-12.5-1.2-5.4,0-6.8,2.5-6.8,6.7v16.8Z"/>
+      <path class="lst1" d="M493.8,213.8h10.9v48.5h-10.9v-48.5ZM506.1,237.5l13.1-23.8h12.3l-13.6,23.8,14.6,24.8h-12.3l-14.1-24.8Z"/>
+    </svg>
+    <span style="width:1px;height:22px;background:rgba(255,255,255,0.35);margin:0 10px;flex-shrink:0;align-self:center;"></span>
+    <span style="font-size:13px;font-weight:500;color:#fff;letter-spacing:0.3px;">Supplier</span>
   </div>
   <div class="topbar-right">
-    <div class="notif">
-      <svg class="notif-icon" viewBox="0 0 20 20"><path d="M10 2a6 6 0 00-6 6v2.586l-1.707 1.707A1 1 0 003 14h14a1 1 0 00.707-1.707L16 10.586V8a6 6 0 00-6-6zM10 18a2 2 0 01-2-2h4a2 2 0 01-2 2z"/></svg>
+    <div class="notif" style="margin-right:16px;">
+      <span class="material-symbols-outlined notif-icon" style="font-size:26px;">notifications</span>
       <div class="notif-badge">4</div>
     </div>
-    <div class="user-pill">
-      <div class="avatar">JM</div>
-      <span class="user-name">Jordan Mills</span>
-      <span class="chevron-down">▾</span>
-    </div>
+    <div class="avatar" style="cursor:pointer;">JM</div>
   </div>
 </div>
 
@@ -118,173 +144,112 @@
 <nav class="navbar">
 
   <div class="nav-item active" onclick="showPage('quotes')">
-    <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 6h6M5 9h4"/></svg>
+    <span class="material-symbols-outlined nav-icon">request_quote</span>
     Quotes
-    <span class="caret">▾</span>
-    <div class="dropdown">
-      <a href="#">New Quote</a>
-      <a href="#">Active Quotes</a>
-      <a href="#">Quote Templates</a>
-      <div class="dropdown-divider"></div>
-      <a href="#">Archived</a>
-    </div>
   </div>
 
   <div class="nav-item" onclick="showPage('orders')">
-    <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h12l-1.5 8H3.5L2 3z"/><circle cx="6" cy="14" r="1"/><circle cx="11" cy="14" r="1"/></svg>
+    <span class="material-symbols-outlined nav-icon">shopping_cart</span>
     My Orders
-    <span class="caret">▾</span>
-    <div class="dropdown">
-      <a href="#">All Orders</a>
-      <a href="#">Open Orders</a>
-      <a href="#">Shipment Tracking</a>
-      <div class="dropdown-divider"></div>
-      <a href="#">Returns &amp; Disputes</a>
-    </div>
   </div>
 
   <div class="nav-item" onclick="showPage('credit')">
-    <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="14" height="9" rx="2"/><path d="M1 7h14"/><path d="M4 10.5h2"/></svg>
+    <span class="material-symbols-outlined nav-icon">credit_card</span>
     Credit Management
-    <span class="caret">▾</span>
-    <div class="dropdown">
-      <a href="#">Credit Overview</a>
-      <a href="#">Credit Applications <span class="badge-new">New</span></a>
-      <a href="#">Payment Terms</a>
-      <div class="dropdown-divider"></div>
-      <a href="#">Statements</a>
-    </div>
   </div>
 
   <div class="nav-item" onclick="showPage('reports')">
-    <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="10" width="3" height="4"/><rect x="6.5" y="6" width="3" height="8"/><rect x="11" y="2" width="3" height="12"/></svg>
+    <span class="material-symbols-outlined nav-icon">bar_chart</span>
     Reports
-    <span class="caret">▾</span>
-    <div class="dropdown">
-      <a href="#">Sales Summary</a>
-      <a href="#">Order Analytics</a>
-      <a href="#">Credit Reports</a>
-      <div class="dropdown-divider"></div>
-      <a href="#">Schedule Export</a>
-    </div>
   </div>
 
   <div class="nav-item" onclick="showPage('tools')">
-    <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2l-1 1-3 3 1 1 3-3 1-1-1-1zM2 13l1-1 3-3-1-1-3 3-1 1 1 1z"/><path d="M5 5l6 6"/></svg>
+    <span class="material-symbols-outlined nav-icon">handyman</span>
     Tools
-    <span class="caret">▾</span>
-    <div class="dropdown">
-      <a href="#">Price Calculator</a>
-      <a href="#">Product Configurator</a>
-      <a href="#">Import / Export</a>
-      <div class="dropdown-divider"></div>
-      <a href="#">API Access</a>
-    </div>
   </div>
 
 </nav>
 
 <!-- PAGE CONTENT -->
-<div class="page" id="page-quotes">
-  <div class="page-header">
-    <div>
+<div class="page" id="page-quotes" style="padding:0;">
+
+  <!-- ── Single sticky header block ── -->
+  <div id="quotes-sticky-block" style="position:sticky;top:100px;z-index:80;background:#f4f5f7;padding:28px 24px 0;">
+    <div style="margin-bottom:16px;">
       <div class="page-title">Quotes</div>
       <div class="page-sub">Manage and track all your open and historical quotes</div>
     </div>
-    <div style="display:flex;gap:8px;">
-      <button class="btn btn-outline">
-        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3v10M3 8h10"/></svg>
-        Import
-      </button>
-      <button class="btn btn-primary">
-        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3v10M3 8h10"/></svg>
-        New Quote
-      </button>
-    </div>
-  </div>
-
-  <div class="stats-row">
-    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#185FA5;border-radius:0 2px 2px 0;"></div><div class="stat-label">Active Quotes</div><div class="stat-value">24</div><div class="stat-delta delta-up">↑ 3 this week</div></div>
-    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#3B6D11;border-radius:0 2px 2px 0;"></div><div class="stat-label">Quote Value</div><div class="stat-value">$184k</div><div class="stat-delta delta-up">↑ 12% vs last mo</div></div>
-    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#854F0B;border-radius:0 2px 2px 0;"></div><div class="stat-label">Expiring Soon</div><div class="stat-value">6</div><div class="stat-delta delta-down">↓ 2 expire today</div></div>
-    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#534AB7;border-radius:0 2px 2px 0;"></div><div class="stat-label">Win Rate</div><div class="stat-value">68%</div><div class="stat-delta delta-up">↑ 4pts vs Q2</div></div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div class="card-title">Recent Quotes</div>
-      <div class="filter-row">
-        <button class="filter-btn active">All</button>
-        <button class="filter-btn">Pending</button>
-        <button class="filter-btn">Approved</button>
-        <button class="filter-btn">Expired</button>
+    <div style="background:#fff;border-radius:10px 10px 0 0;border:0.5px solid #e2e5ea;">
+      <div class="card-header" id="quotes-card-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="display:flex;align-items:center;gap:6px;border:1.5px solid #c4c9d0;border-radius:6px;padding:0 12px;height:30px;background:#fff;">
+            <span class="material-symbols-outlined" style="font-size:16px;color:#a0aec0;">search</span>
+            <input type="text" placeholder="Search quotes…" style="border:none;outline:none;font-size:12px;font-family:'Open Sans',sans-serif;color:#2d3748;background:transparent;width:140px;" oninput="filterSearch(this.value)">
+          </div>
+        </div>
+        <div class="filter-row" style="align-items:center;">
+          <button class="filter-btn" onclick="switchTab(this,'all')">All <span id="count-all" style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:50px;margin-left:7px;display:inline-block;min-width:28px;text-align:center;">15</span></button>
+          <button class="filter-btn active" onclick="switchTab(this,'new')">New Quotes <span id="count-new" style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:50px;margin-left:7px;display:inline-block;min-width:28px;text-align:center;">5</span></button>
+          <button class="filter-btn" onclick="switchTab(this,'open')">Opened Quotes <span id="count-open" style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:50px;margin-left:7px;display:inline-block;min-width:28px;text-align:center;">5</span></button>
+          <button class="filter-btn" onclick="switchTab(this,'submitted')">Submitted Quotes <span id="count-submitted" style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:50px;margin-left:7px;display:inline-block;min-width:28px;text-align:center;">5</span></button>
+        </div>
       </div>
+      <table id="quotes-table" style="width:100%;table-layout:fixed;border-collapse:separate;border-spacing:0;font-size:13px;">
+        <thead id="quotes-thead"><tr><th style="width:16.6%">Due</th><th style="width:16.6%">Quote</th><th style="width:16.6%">Purchaser</th><th style="width:16.6%">Status</th><th style="width:16.6%">Other Suppliers</th><th style="width:16.6%;text-align:center;">Actions</th></tr></thead>
+      </table>
     </div>
-    <table>
-      <thead><tr><th>Quote #</th><th>Customer</th><th>Items</th><th>Total</th><th>Expires</th><th>Status</th><th></th></tr></thead>
-      <tbody>
+  </div>
+
+  <!-- ── Scrollable rows ── -->
+  <div style="background:#fff;border:0.5px solid #e2e5ea;border-top:none;border-radius:0 0 10px 10px;margin:0 24px 28px;">
+    <table style="width:100%;table-layout:fixed;border-collapse:separate;border-spacing:0;font-size:13px;">
+      <colgroup><col style="width:16.6%"><col style="width:16.6%"><col style="width:16.6%"><col style="width:16.6%"><col style="width:16.6%"><col style="width:16.6%"></colgroup>
+      <tbody id="quotes-tbody">
         <tr>
-          <td style="font-weight:600;color:#185FA5;">#QT-4821</td>
-          <td><div class="company-cell"><div class="co-avatar" style="background:#E6F1FB;color:#185FA5;">AC</div>Acme Corp</div></td>
-          <td>12</td><td>$34,200</td><td>Apr 15, 2026</td>
-          <td><span class="status-pill s-pending">Pending</span></td>
-          <td><a class="action-link">View →</a></td>
+          <td>Apr 15, 2026</td>
+          <td style="font-weight:600;color:#0db14b;text-decoration:underline;">#QT-4821</td>
+          <td>Acme Corp</td>
+          <td><span class="status-pill s-approved">New</span></td>
+          <td style="white-space:nowrap;"><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#e07b00;font-variation-settings:'FILL' 1;margin-right:10px;">error</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span></td>
+          <td style="text-align:center;"><a class="action-link" title="Print"><span class="material-symbols-outlined" style="font-size:18px;">print</span></a></td>
         </tr>
         <tr>
-          <td style="font-weight:600;color:#185FA5;">#QT-4820</td>
-          <td><div class="company-cell"><div class="co-avatar" style="background:#E1F5EE;color:#0F6E56;">BG</div>Blue Giant LLC</div></td>
-          <td>4</td><td>$8,750</td><td>Apr 10, 2026</td>
-          <td><span class="status-pill s-approved">Approved</span></td>
-          <td><a class="action-link">View →</a></td>
+          <td>Apr 10, 2026</td>
+          <td style="font-weight:600;color:#0db14b;text-decoration:underline;">#QT-4820</td>
+          <td>Blue Giant LLC</td>
+          <td><span class="status-pill s-approved">New</span></td>
+          <td style="white-space:nowrap;"><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span></td>
+          <td style="text-align:center;"><a class="action-link" title="Print"><span class="material-symbols-outlined" style="font-size:18px;">print</span></a></td>
         </tr>
         <tr>
-          <td style="font-weight:600;color:#185FA5;">#QT-4818</td>
-          <td><div class="company-cell"><div class="co-avatar" style="background:#FAEEDA;color:#854F0B;">NX</div>Nexaflow Inc</div></td>
-          <td>7</td><td>$21,000</td><td>Apr 5, 2026</td>
-          <td><span class="status-pill s-review">In Review</span></td>
-          <td><a class="action-link">View →</a></td>
+          <td>Apr 5, 2026</td>
+          <td style="font-weight:600;color:#0db14b;text-decoration:underline;">#QT-4818</td>
+          <td>Nexaflow Inc</td>
+          <td><span class="status-pill s-approved">New</span></td>
+          <td style="white-space:nowrap;"><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#e07b00;font-variation-settings:'FILL' 1;margin-right:10px;">error</span><span class="material-symbols-outlined" style="font-size:20px;color:#e07b00;font-variation-settings:'FILL' 1;margin-right:10px;">error</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span></td>
+          <td style="text-align:center;"><a class="action-link" title="Print"><span class="material-symbols-outlined" style="font-size:18px;">print</span></a></td>
         </tr>
         <tr>
-          <td style="font-weight:600;color:#185FA5;">#QT-4815</td>
-          <td><div class="company-cell"><div class="co-avatar" style="background:#EEEDFE;color:#534AB7;">PW</div>Pinnacle Works</div></td>
-          <td>18</td><td>$67,900</td><td>Mar 30, 2026</td>
-          <td><span class="status-pill s-declined">Declined</span></td>
-          <td><a class="action-link">View →</a></td>
+          <td>Mar 30, 2026</td>
+          <td style="font-weight:600;color:#0db14b;text-decoration:underline;">#QT-4815</td>
+          <td>Pinnacle Works</td>
+          <td><span class="status-pill s-approved">New</span></td>
+          <td style="white-space:nowrap;"><span class="material-symbols-outlined" style="font-size:20px;color:#e07b00;font-variation-settings:'FILL' 1;margin-right:10px;">error</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#e07b00;font-variation-settings:'FILL' 1;margin-right:10px;">error</span><span class="material-symbols-outlined" style="font-size:20px;color:#e07b00;font-variation-settings:'FILL' 1;margin-right:10px;">error</span></td>
+          <td style="text-align:center;"><a class="action-link" title="Print"><span class="material-symbols-outlined" style="font-size:18px;">print</span></a></td>
         </tr>
         <tr>
-          <td style="font-weight:600;color:#185FA5;">#QT-4812</td>
-          <td><div class="company-cell"><div class="co-avatar" style="background:#FBEAF0;color:#993556;">ST</div>Stellar Tech</div></td>
-          <td>3</td><td>$5,100</td><td>Apr 20, 2026</td>
-          <td><span class="status-pill s-approved">Approved</span></td>
-          <td><a class="action-link">View →</a></td>
+          <td>Apr 20, 2026</td>
+          <td style="font-weight:600;color:#0db14b;text-decoration:underline;">#QT-4812</td>
+          <td>Stellar Tech</td>
+          <td><span class="status-pill s-approved">New</span></td>
+          <td style="white-space:nowrap;"><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#e07b00;font-variation-settings:'FILL' 1;margin-right:10px;">error</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span></td>
+          <td style="text-align:center;"><a class="action-link" title="Print"><span class="material-symbols-outlined" style="font-size:18px;">print</span></a></td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <div class="two-col">
-    <div class="card">
-      <div class="card-header"><div class="card-title">Expiring Quotes</div><a class="action-link">See all</a></div>
-      <div style="padding:0 20px;">
-        <ul class="quick-list">
-          <li><span>#QT-4805 — Meridian Co.</span><span class="quick-badge" style="background:#FCEBEB;color:#A32D2D;">Today</span></li>
-          <li><span>#QT-4808 — Vortex Ltd.</span><span class="quick-badge" style="background:#FAEEDA;color:#854F0B;">2 days</span></li>
-          <li><span>#QT-4811 — SkyBridge</span><span class="quick-badge" style="background:#FAEEDA;color:#854F0B;">4 days</span></li>
-          <li><span>#QT-4814 — Orion Grp.</span><span class="quick-badge" style="background:#EAF3DE;color:#3B6D11;">7 days</span></li>
-        </ul>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header"><div class="card-title">Quick Actions</div></div>
-      <div style="padding:16px 20px;display:flex;flex-direction:column;gap:8px;">
-        <button class="btn btn-outline" style="justify-content:flex-start;width:100%;">+ Create from template</button>
-        <button class="btn btn-outline" style="justify-content:flex-start;width:100%;">↓ Download quote PDF</button>
-        <button class="btn btn-outline" style="justify-content:flex-start;width:100%;">⟳ Clone last quote</button>
-        <button class="btn btn-outline" style="justify-content:flex-start;width:100%;">✉ Email to customer</button>
-      </div>
-    </div>
-  </div>
-</div>
+</div><!-- end page-quotes -->
 
 <div class="page" id="page-orders" style="display:none">
   <div class="page-header">
@@ -292,7 +257,7 @@
     <button class="btn btn-primary">+ New Order</button>
   </div>
   <div class="stats-row">
-    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#185FA5;border-radius:0 2px 2px 0;"></div><div class="stat-label">Open Orders</div><div class="stat-value">37</div></div>
+    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#0db14b;border-radius:0 2px 2px 0;"></div><div class="stat-label">Open Orders</div><div class="stat-value">37</div></div>
     <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#3B6D11;border-radius:0 2px 2px 0;"></div><div class="stat-label">Shipped</div><div class="stat-value">12</div></div>
     <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#854F0B;border-radius:0 2px 2px 0;"></div><div class="stat-label">Awaiting</div><div class="stat-value">8</div></div>
     <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#534AB7;border-radius:0 2px 2px 0;"></div><div class="stat-label">Month Spend</div><div class="stat-value">$92k</div></div>
@@ -300,9 +265,9 @@
   <div class="card"><div class="card-header"><div class="card-title">Order History</div></div>
     <table><thead><tr><th>Order #</th><th>Customer</th><th>Date</th><th>Total</th><th>Status</th><th></th></tr></thead>
     <tbody>
-      <tr><td style="font-weight:600;color:#185FA5;">#PO-9910</td><td>Acme Corp</td><td>Mar 28, 2026</td><td>$12,400</td><td><span class="status-pill s-approved">Shipped</span></td><td><a class="action-link">Track →</a></td></tr>
-      <tr><td style="font-weight:600;color:#185FA5;">#PO-9908</td><td>Blue Giant LLC</td><td>Mar 25, 2026</td><td>$6,200</td><td><span class="status-pill s-pending">Processing</span></td><td><a class="action-link">Track →</a></td></tr>
-      <tr><td style="font-weight:600;color:#185FA5;">#PO-9905</td><td>Nexaflow Inc</td><td>Mar 20, 2026</td><td>$18,750</td><td><span class="status-pill s-review">In Transit</span></td><td><a class="action-link">Track →</a></td></tr>
+      <tr><td style="font-weight:600;color:#0db14b;">#PO-9910</td><td>Acme Corp</td><td>Mar 28, 2026</td><td>$12,400</td><td><span class="status-pill s-approved">Shipped</span></td><td><a class="action-link">Track →</a></td></tr>
+      <tr><td style="font-weight:600;color:#0db14b;">#PO-9908</td><td>Blue Giant LLC</td><td>Mar 25, 2026</td><td>$6,200</td><td><span class="status-pill s-pending">Processing</span></td><td><a class="action-link">Track →</a></td></tr>
+      <tr><td style="font-weight:600;color:#0db14b;">#PO-9905</td><td>Nexaflow Inc</td><td>Mar 20, 2026</td><td>$18,750</td><td><span class="status-pill s-review">In Transit</span></td><td><a class="action-link">Track →</a></td></tr>
     </tbody></table>
   </div>
 </div>
@@ -313,7 +278,7 @@
     <button class="btn btn-primary">+ New Application</button>
   </div>
   <div class="stats-row">
-    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#185FA5;border-radius:0 2px 2px 0;"></div><div class="stat-label">Total Credit Line</div><div class="stat-value">$500k</div></div>
+    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#0db14b;border-radius:0 2px 2px 0;"></div><div class="stat-label">Total Credit Line</div><div class="stat-value">$500k</div></div>
     <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#e24b4a;border-radius:0 2px 2px 0;"></div><div class="stat-label">Used Credit</div><div class="stat-value">$213k</div></div>
     <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#3B6D11;border-radius:0 2px 2px 0;"></div><div class="stat-label">Available</div><div class="stat-value">$287k</div></div>
     <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#854F0B;border-radius:0 2px 2px 0;"></div><div class="stat-label">Overdue Balance</div><div class="stat-value">$4.2k</div></div>
@@ -321,9 +286,9 @@
   <div class="card"><div class="card-header"><div class="card-title">Credit Applications</div></div>
     <table><thead><tr><th>App #</th><th>Company</th><th>Amount</th><th>Submitted</th><th>Status</th><th></th></tr></thead>
     <tbody>
-      <tr><td style="font-weight:600;">#CR-221</td><td>Acme Corp</td><td>$100,000</td><td>Mar 22, 2026</td><td><span class="status-pill s-review">Under Review</span></td><td><a class="action-link">View →</a></td></tr>
-      <tr><td style="font-weight:600;">#CR-220</td><td>Vortex Ltd</td><td>$50,000</td><td>Mar 15, 2026</td><td><span class="status-pill s-approved">Approved</span></td><td><a class="action-link">View →</a></td></tr>
-      <tr><td style="font-weight:600;">#CR-219</td><td>SkyBridge</td><td>$75,000</td><td>Mar 8, 2026</td><td><span class="status-pill s-declined">Declined</span></td><td><a class="action-link">View →</a></td></tr>
+      <tr><td style="font-weight:600;">#CR-221</td><td>Acme Corp</td><td>$100,000</td><td>Mar 22, 2026</td><td><span class="status-pill s-review">Under Review</span></td><td><a class="action-link" title="Print"><span class="material-symbols-outlined" style="font-size:18px;">print</span></a></td></tr>
+      <tr><td style="font-weight:600;">#CR-220</td><td>Vortex Ltd</td><td>$50,000</td><td>Mar 15, 2026</td><td><span class="status-pill s-approved">New</span></td><td><a class="action-link" title="Print"><span class="material-symbols-outlined" style="font-size:18px;">print</span></a></td></tr>
+      <tr><td style="font-weight:600;">#CR-219</td><td>SkyBridge</td><td>$75,000</td><td>Mar 8, 2026</td><td><span class="status-pill s-approved">New</span></td><td><a class="action-link" title="Print"><span class="material-symbols-outlined" style="font-size:18px;">print</span></a></td></tr>
     </tbody></table>
   </div>
 </div>
@@ -356,6 +321,97 @@
 </div>
 
 <script>
+const iconCheck = `<span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span>`;
+const iconWarn  = `<span class="material-symbols-outlined" style="font-size:20px;color:#e07b00;font-variation-settings:'FILL' 1;margin-right:10px;">error</span>`;
+
+let currentTabData = [];
+
+const tabData = {
+  get all() { return [...this.new, ...this.open, ...this.submitted]; },
+  new: [
+    { due:'Apr 15, 2026', quote:'#QT-4821', purchaser:'Acme Corp',        status:'<span class="status-pill s-approved">New</span>', icons:[1,1,0,1] },
+    { due:'Apr 10, 2026', quote:'#QT-4820', purchaser:'Blue Giant LLC',   status:'<span class="status-pill s-approved">New</span>', icons:[1,1,1,1] },
+    { due:'Apr 5, 2026',  quote:'#QT-4818', purchaser:'Nexaflow Inc',     status:'<span class="status-pill s-approved">New</span>', icons:[1,0,0,1] },
+    { due:'Mar 30, 2026', quote:'#QT-4815', purchaser:'Pinnacle Works',   status:'<span class="status-pill s-approved">New</span>', icons:[0,1,0,0] },
+    { due:'Apr 20, 2026', quote:'#QT-4812', purchaser:'Stellar Tech',     status:'<span class="status-pill s-approved">New</span>', icons:[1,1,0,1] },
+    { due:'Mar 28, 2026', quote:'#QT-4810', purchaser:'Harbour Group',    status:'<span class="status-pill s-approved">New</span>', icons:[1,0,1,1] },
+    { due:'Mar 25, 2026', quote:'#QT-4808', purchaser:'Atlas Supply Co.', status:'<span class="status-pill s-approved">New</span>', icons:[1,1,1,0] },
+    { due:'Mar 22, 2026', quote:'#QT-4806', purchaser:'Drift Industries', status:'<span class="status-pill s-approved">New</span>', icons:[0,1,1,1] },
+    { due:'Mar 19, 2026', quote:'#QT-4804', purchaser:'Zenith Parts',     status:'<span class="status-pill s-approved">New</span>', icons:[1,0,0,0] },
+    { due:'Mar 16, 2026', quote:'#QT-4802', purchaser:'Core Dynamics',    status:'<span class="status-pill s-approved">New</span>', icons:[1,1,0,0] },
+    { due:'Mar 13, 2026', quote:'#QT-4800', purchaser:'Peak Solutions',   status:'<span class="status-pill s-approved">New</span>', icons:[0,0,1,1] },
+    { due:'Mar 10, 2026', quote:'#QT-4798', purchaser:'Delta Mfg.',       status:'<span class="status-pill s-approved">New</span>', icons:[1,1,1,1] },
+    { due:'Mar 7, 2026',  quote:'#QT-4796', purchaser:'Fusion Tech',      status:'<span class="status-pill s-approved">New</span>', icons:[0,1,0,1] },
+    { due:'Mar 4, 2026',  quote:'#QT-4794', purchaser:'Streamline Co.',   status:'<span class="status-pill s-approved">New</span>', icons:[1,0,1,0] },
+    { due:'Mar 1, 2026',  quote:'#QT-4792', purchaser:'Brightfield Ltd.', status:'<span class="status-pill s-approved">New</span>', icons:[1,1,0,1] },
+  ],
+  open: [
+    { due:'Apr 18, 2026', quote:'#QT-4830', purchaser:'Redline Co.',      status:'<span class="status-pill s-open">Open</span>', icons:[1,0,1,1] },
+    { due:'Apr 14, 2026', quote:'#QT-4828', purchaser:'Vertex Group',     status:'<span class="status-pill s-open">Open</span>', icons:[1,1,0,0] },
+    { due:'Apr 12, 2026', quote:'#QT-4826', purchaser:'Dyna Corp',        status:'<span class="status-pill s-open">Open</span>', icons:[0,1,1,1] },
+    { due:'Apr 9, 2026',  quote:'#QT-4824', purchaser:'Skyline Ltd.',     status:'<span class="status-pill s-open">Open</span>', icons:[1,1,1,0] },
+    { due:'Apr 7, 2026',  quote:'#QT-4822', purchaser:'Ironworks Inc.',   status:'<span class="status-pill s-open">Open</span>', icons:[1,0,0,0] },
+    { due:'Apr 4, 2026',  quote:'#QT-4860', purchaser:'Torque Systems',   status:'<span class="status-pill s-open">Open</span>', icons:[0,1,0,1] },
+    { due:'Apr 1, 2026',  quote:'#QT-4858', purchaser:'Nexus Brands',     status:'<span class="status-pill s-open">Open</span>', icons:[1,1,0,1] },
+    { due:'Mar 29, 2026', quote:'#QT-4856', purchaser:'Cargoline Ltd.',   status:'<span class="status-pill s-open">Open</span>', icons:[1,0,1,0] },
+    { due:'Mar 26, 2026', quote:'#QT-4854', purchaser:'Westfield Auto',   status:'<span class="status-pill s-open">Open</span>', icons:[0,0,1,1] },
+    { due:'Mar 23, 2026', quote:'#QT-4852', purchaser:'Apex Components',  status:'<span class="status-pill s-open">Open</span>', icons:[1,1,1,1] },
+    { due:'Mar 20, 2026', quote:'#QT-4850', purchaser:'Ridgeline Corp.',  status:'<span class="status-pill s-open">Open</span>', icons:[0,1,1,0] },
+    { due:'Mar 17, 2026', quote:'#QT-4848', purchaser:'Calibre Group',    status:'<span class="status-pill s-open">Open</span>', icons:[1,0,0,1] },
+    { due:'Mar 14, 2026', quote:'#QT-4846', purchaser:'Summit Hldgs.',    status:'<span class="status-pill s-open">Open</span>', icons:[1,1,0,0] },
+    { due:'Mar 11, 2026', quote:'#QT-4844', purchaser:'Fleetwood Parts',  status:'<span class="status-pill s-open">Open</span>', icons:[0,1,0,0] },
+    { due:'Mar 8, 2026',  quote:'#QT-4842', purchaser:'Overland Supply',  status:'<span class="status-pill s-open">Open</span>', icons:[1,0,1,1] },
+  ],
+  submitted: [
+    { due:'Apr 22, 2026', quote:'#QT-4840', purchaser:'Crest Holdings',   status:'<span class="status-pill s-submitted">Submitted</span>', icons:[1,1,1,1] },
+    { due:'Apr 19, 2026', quote:'#QT-4838', purchaser:'Orion Grp.',       status:'<span class="status-pill s-submitted">Submitted</span>', icons:[1,0,1,0] },
+    { due:'Apr 16, 2026', quote:'#QT-4836', purchaser:'SkyBridge',        status:'<span class="status-pill s-submitted">Submitted</span>', icons:[0,0,1,1] },
+    { due:'Apr 11, 2026', quote:'#QT-4834', purchaser:'Vortex Ltd.',      status:'<span class="status-pill s-submitted">Submitted</span>', icons:[1,1,0,1] },
+    { due:'Apr 8, 2026',  quote:'#QT-4832', purchaser:'Meridian Co.',     status:'<span class="status-pill s-submitted">Submitted</span>', icons:[1,0,0,1] },
+    { due:'Apr 5, 2026',  quote:'#QT-4880', purchaser:'Clearpath Auto',   status:'<span class="status-pill s-submitted">Submitted</span>', icons:[1,1,1,0] },
+    { due:'Apr 2, 2026',  quote:'#QT-4878', purchaser:'Ironclad Tech.',   status:'<span class="status-pill s-submitted">Submitted</span>', icons:[0,1,1,1] },
+    { due:'Mar 30, 2026', quote:'#QT-4876', purchaser:'Bridgeway Grp.',   status:'<span class="status-pill s-submitted">Submitted</span>', icons:[1,0,1,1] },
+    { due:'Mar 27, 2026', quote:'#QT-4874', purchaser:'Northstar Parts',  status:'<span class="status-pill s-submitted">Submitted</span>', icons:[0,1,0,1] },
+    { due:'Mar 24, 2026', quote:'#QT-4872', purchaser:'Alloy Works',      status:'<span class="status-pill s-submitted">Submitted</span>', icons:[1,1,0,0] },
+    { due:'Mar 21, 2026', quote:'#QT-4870', purchaser:'Titan Supply',     status:'<span class="status-pill s-submitted">Submitted</span>', icons:[1,0,1,0] },
+    { due:'Mar 18, 2026', quote:'#QT-4868', purchaser:'Lowland Motors',   status:'<span class="status-pill s-submitted">Submitted</span>', icons:[0,0,0,1] },
+    { due:'Mar 15, 2026', quote:'#QT-4866', purchaser:'Spartan Auto',     status:'<span class="status-pill s-submitted">Submitted</span>', icons:[1,1,1,1] },
+    { due:'Mar 12, 2026', quote:'#QT-4864', purchaser:'Enduro Parts',     status:'<span class="status-pill s-submitted">Submitted</span>', icons:[1,0,0,0] },
+    { due:'Mar 9, 2026',  quote:'#QT-4862', purchaser:'Baseline Corp.',   status:'<span class="status-pill s-submitted">Submitted</span>', icons:[0,1,1,0] },
+  ]
+};
+
+function renderIcons(arr) {
+  return arr.map(v => v ? iconCheck : iconWarn).join('');
+}
+
+function filterSearch(val) {
+  const filtered = currentTabData.filter(r => r.purchaser.toLowerCase().includes(val.toLowerCase()) || r.quote.toLowerCase().includes(val.toLowerCase()));
+  document.getElementById('quotes-tbody').innerHTML = renderRows(filtered);
+}
+
+function switchTab(btn, tab) {
+  document.querySelectorAll('.filter-row .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentTabData = tabData[tab];
+  document.getElementById('quotes-tbody').innerHTML = renderRows(currentTabData);
+}
+
+
+// Pin sticky block exactly below topbar + navbar
+(function() {
+  const block  = document.getElementById('quotes-sticky-block');
+  const offset = document.querySelector('.topbar').getBoundingClientRect().height
+               + document.querySelector('nav.navbar').getBoundingClientRect().height;
+  block.style.top = offset + 'px';
+
+  // Shadow on thead only when page has scrolled
+  const thead = document.getElementById('quotes-thead');
+  window.addEventListener('scroll', () => {
+    thead.classList.toggle('scrolled', window.scrollY > 0);
+  }, { passive: true });
+})();
+
 function showPage(name) {
   ['quotes','orders','credit','reports','tools'].forEach(p => {
     document.getElementById('page-'+p).style.display = p===name?'block':'none';
@@ -365,6 +421,27 @@ function showPage(name) {
     el.classList.toggle('active', pages[i]===name);
   });
 }
+function renderRows(data) {
+  return data.map(r => `
+    <tr>
+      <td>${r.due}</td>
+      <td style="font-weight:600;color:#0db14b;text-decoration:underline;">${r.quote}</td>
+      <td>${r.purchaser}</td>
+      <td>${r.status}</td>
+      <td style="white-space:nowrap;">${renderIcons(r.icons)}</td>
+      <td style="text-align:center;"><a class="action-link" title="Print"><span class="material-symbols-outlined" style="font-size:18px;">print</span></a></td>
+    </tr>`).join('');
+}
+
+currentTabData = tabData['new'];
+document.getElementById('quotes-tbody').innerHTML = renderRows(currentTabData);
+
+// Set pill counters from actual data
+document.getElementById('count-all').textContent = tabData.all.length;
+document.getElementById('count-new').textContent = tabData.new.length;
+document.getElementById('count-open').textContent = tabData.open.length;
+document.getElementById('count-submitted').textContent = tabData.submitted.length;
+
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', function() {
     this.closest('.filter-row').querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
