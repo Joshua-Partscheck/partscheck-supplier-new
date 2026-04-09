@@ -10,7 +10,10 @@
       "Bash(where powershell:*)",
       "Bash(where pwsh:*)",
       "Bash(netstat -ano)",
-      "Bash(sort -t: -k2 -n)"
+      "Bash(sort -t: -k2 -n)",
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "Bash(xargs grep:*)"
     ]
   }
 }
