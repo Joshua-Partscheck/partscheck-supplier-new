@@ -106,18 +106,18 @@
   /* QUOTE DETAIL */
   .qd-back { display:inline-flex; align-items:center; gap:6px; font-size:13px; color:#0db14b; cursor:pointer; margin-bottom:18px; font-weight:500; background:none; border:none; padding:0; }
   .qd-back:hover { text-decoration:underline; }
-  .qd-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; border:1px solid #bbb; border-radius:4px; overflow:hidden; }
-  .qd-panel { border-right:1px solid #bbb; }
+  .qd-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; border:0.5px solid #e2e5ea; border-radius:8px; overflow:hidden; }
+  .qd-panel { border-right:0.5px solid #e2e5ea; }
   .qd-panel:last-child { border-right:none; }
-  .qd-panel-head { background:none; color:#1a1a2e; font-weight:700; font-size:24px; padding:8px 14px 4px; }
+  .qd-panel-head { background:none; color:#1a1a2e; font-weight:600; font-size:20px; padding:8px 14px 4px; }
   .qd-panel-body { padding:16px 14px; }
   .qd-row { display:flex; flex-direction:column; gap:3px; margin-bottom:12px; font-size:13px; }
   .qd-row:last-child { margin-bottom:0; }
-  .qd-label { font-weight:700; color:#222; font-size:12px; text-transform:uppercase; letter-spacing:0.3px; }
+  .qd-label { font-weight:600; color:#718096; font-size:11px; text-transform:uppercase; letter-spacing:0.4px; }
   .qd-val { color:#333; font-size:16px; }
-  .qd-input { border:1px solid #999; padding:3px 6px; font-size:13px; font-family:'Open Sans',sans-serif; width:120px; }
-  .qd-select { border:1px solid #999; padding:3px 6px; font-size:13px; font-family:'Open Sans',sans-serif; }
-  .qd-optional-head { background:none; color:#1a1a2e; font-weight:700; font-size:18px; padding:8px 0 4px; margin-top:14px; }
+  .qd-input { border:0.5px solid #e2e5ea; padding:3px 6px; font-size:13px; font-family:'Open Sans',sans-serif; width:120px; border-radius:4px; }
+  .qd-select { border:0.5px solid #e2e5ea; padding:3px 6px; font-size:13px; font-family:'Open Sans',sans-serif; border-radius:4px; }
+  .qd-optional-head { background:none; color:#1a1a2e; font-weight:600; font-size:20px; padding:8px 0 4px; margin-top:14px; }
   .qd-checkbox-row { display:flex; align-items:center; gap:6px; font-size:12px; color:#444; font-style:italic; margin-top:8px; }
 
   /* QUICK ACCESS */
@@ -319,7 +319,7 @@
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:0.5px solid #e2e5ea;border-radius:8px;overflow:hidden;margin-bottom:24px;">
       <div style="padding:16px 20px;border-right:0.5px solid #e2e5ea;">
         <div style="font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px;">Quote No</div>
-        <div style="font-size:24px;font-weight:700;color:#1a1a2e;" id="qd-quote-nr-display"></div>
+        <div style="font-size:20px;font-weight:600;color:#1a1a2e;" id="qd-quote-nr-display"></div>
       </div>
       <div style="padding:16px 20px;border-right:0.5px solid #e2e5ea;">
         <div style="font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px;">Quote Status</div>
@@ -365,7 +365,7 @@
         <div class="qd-row"><span class="qd-label">Series</span><span class="qd-val"></span></div>
         <div class="qd-row"><span class="qd-label">Trans</span><span class="qd-val">A</span></div>
         <div class="qd-row"><span class="qd-label">Colour</span><span class="qd-val">Mat Red</span></div>
-        <div class="qd-row"><span class="qd-label">VIN</span><span class="qd-val" style="font-family:monospace;font-size:12px;border:1px solid #bbb;padding:2px 6px;background:#f9f9f9;">MR053REH205309076</span></div>
+        <div class="qd-row"><span class="qd-label">VIN</span><span class="qd-val" style="font-family:monospace;font-size:12px;border:0.5px solid #e2e5ea;padding:2px 6px;background:#f9f9f9;border-radius:4px;">MR053REH205309076</span></div>
         <div class="qd-row"><span class="qd-label">Body</span><span class="qd-val">4 DOOR Sedan 4Door</span></div>
         <div class="qd-row"><span class="qd-label">Mth/Yr</span><span class="qd-val">1/2025</span></div>
         <div class="qd-row"><span class="qd-label">Veh Reg</span><span class="qd-val">55FHR</span></div>
