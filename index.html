@@ -87,12 +87,12 @@
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: #fafbff; }
   .status-pill { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 20px; font-size: 11.5px; font-weight: 500; }
-  .s-approved { background: #e6f7ee; color: #0db14b; }
-  .s-pending { background: #FAEEDA; color: #854F0B; }
-  .s-declined { background: #FCEBEB; color: #A32D2D; }
-  .s-review { background: #E6F1FB; color: #0db14b; }
-  .s-open { background: #EDE9FE; color: #6D28D9; }
-  .s-submitted { background: #FEF3C7; color: #92400E; }
+  .s-approved { background: #0db14b; color: #fff; }
+  .s-pending { background: #d97706; color: #fff; }
+  .s-declined { background: #dc2626; color: #fff; }
+  .s-review { background: #2563eb; color: #fff; }
+  .s-open { background: #7c3aed; color: #fff; }
+  .s-submitted { background: #b45309; color: #fff; }
   .company-cell { display: flex; align-items: center; gap: 10px; }
   .co-avatar { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
   .action-link { color: #0db14b; font-size: 12px; cursor: pointer; text-decoration: none; }
@@ -102,6 +102,23 @@
   .view-tab.active { color:#0db14b; border-bottom-color:#0db14b; }
   .view-tab span { font-size:11px; font-weight:700; padding:2px 8px; border-radius:50px; background:#e2e5ea; color:#718096; }
   .view-tab.active span { background:#0db14b; color:#fff; }
+
+  /* QUOTE DETAIL */
+  .qd-back { display:inline-flex; align-items:center; gap:6px; font-size:13px; color:#0db14b; cursor:pointer; margin-bottom:18px; font-weight:500; background:none; border:none; padding:0; }
+  .qd-back:hover { text-decoration:underline; }
+  .qd-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; border:1px solid #bbb; border-radius:4px; overflow:hidden; }
+  .qd-panel { border-right:1px solid #bbb; }
+  .qd-panel:last-child { border-right:none; }
+  .qd-panel-head { background:none; color:#1a1a2e; font-weight:700; font-size:24px; padding:8px 14px 4px; }
+  .qd-panel-body { padding:16px 14px; }
+  .qd-row { display:flex; flex-direction:column; gap:3px; margin-bottom:12px; font-size:13px; }
+  .qd-row:last-child { margin-bottom:0; }
+  .qd-label { font-weight:700; color:#222; font-size:12px; text-transform:uppercase; letter-spacing:0.3px; }
+  .qd-val { color:#333; font-size:16px; }
+  .qd-input { border:1px solid #999; padding:3px 6px; font-size:13px; font-family:'Open Sans',sans-serif; width:120px; }
+  .qd-select { border:1px solid #999; padding:3px 6px; font-size:13px; font-family:'Open Sans',sans-serif; }
+  .qd-optional-head { background:none; color:#1a1a2e; font-weight:700; font-size:18px; padding:8px 0 4px; margin-top:14px; }
+  .qd-checkbox-row { display:flex; align-items:center; gap:6px; font-size:12px; color:#444; font-style:italic; margin-top:8px; }
 
   /* QUICK ACCESS */
   .two-col { display: grid; grid-template-columns: 1fr 340px; gap: 14px; margin-top: 14px; }
@@ -236,7 +253,7 @@
       <tbody id="quotes-tbody">
         <tr>
           <td>Apr 15, 2026</td>
-          <td style="font-weight:600;color:#0db14b;text-decoration:underline;">#QT-4821</td>
+          <td style="font-weight:700;color:#0db14b;text-decoration:underline;cursor:pointer;" onclick="openQuoteDetail('#10821','City Auto Repairs')">#10821</td>
           <td>Acme Corp</td>
           <td><span class="status-pill s-approved">New</span></td>
           <td style="white-space:nowrap;"><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#e07b00;font-variation-settings:'FILL' 1;margin-right:10px;">error</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span></td>
@@ -244,7 +261,7 @@
         </tr>
         <tr>
           <td>Apr 10, 2026</td>
-          <td style="font-weight:600;color:#0db14b;text-decoration:underline;">#QT-4820</td>
+          <td style="font-weight:700;color:#0db14b;text-decoration:underline;cursor:pointer;" onclick="openQuoteDetail('#10820','FastFit Mechanical')">#10820</td>
           <td>Blue Giant LLC</td>
           <td><span class="status-pill s-approved">New</span></td>
           <td style="white-space:nowrap;"><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span></td>
@@ -252,7 +269,7 @@
         </tr>
         <tr>
           <td>Apr 5, 2026</td>
-          <td style="font-weight:600;color:#0db14b;text-decoration:underline;">#QT-4818</td>
+          <td style="font-weight:700;color:#0db14b;text-decoration:underline;cursor:pointer;" onclick="openQuoteDetail('#10818','Northside Panel &amp; Auto')">#10818</td>
           <td>Nexaflow Inc</td>
           <td><span class="status-pill s-approved">New</span></td>
           <td style="white-space:nowrap;"><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#e07b00;font-variation-settings:'FILL' 1;margin-right:10px;">error</span><span class="material-symbols-outlined" style="font-size:20px;color:#e07b00;font-variation-settings:'FILL' 1;margin-right:10px;">error</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span></td>
@@ -260,7 +277,7 @@
         </tr>
         <tr>
           <td>Mar 30, 2026</td>
-          <td style="font-weight:600;color:#0db14b;text-decoration:underline;">#QT-4815</td>
+          <td style="font-weight:700;color:#0db14b;text-decoration:underline;cursor:pointer;" onclick="openQuoteDetail('#10815','Prestige Auto Service')">#10815</td>
           <td>Pinnacle Works</td>
           <td><span class="status-pill s-approved">New</span></td>
           <td style="white-space:nowrap;"><span class="material-symbols-outlined" style="font-size:20px;color:#e07b00;font-variation-settings:'FILL' 1;margin-right:10px;">error</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#e07b00;font-variation-settings:'FILL' 1;margin-right:10px;">error</span><span class="material-symbols-outlined" style="font-size:20px;color:#e07b00;font-variation-settings:'FILL' 1;margin-right:10px;">error</span></td>
@@ -268,7 +285,7 @@
         </tr>
         <tr>
           <td>Apr 20, 2026</td>
-          <td style="font-weight:600;color:#0db14b;text-decoration:underline;">#QT-4812</td>
+          <td style="font-weight:700;color:#0db14b;text-decoration:underline;cursor:pointer;" onclick="openQuoteDetail('#10812','Westside Smash Repairs')">#10812</td>
           <td>Stellar Tech</td>
           <td><span class="status-pill s-approved">New</span></td>
           <td style="white-space:nowrap;"><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#e07b00;font-variation-settings:'FILL' 1;margin-right:10px;">error</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span></td>
@@ -287,6 +304,101 @@
   </div>
 
 </div><!-- end page-quotes -->
+
+<div class="page" id="page-quote-detail" style="display:none;padding:10px 24px 28px;">
+  <button class="qd-back" onclick="showPage('quotes')">
+    <span class="material-symbols-outlined" style="font-size:16px;">arrow_back</span> Back to Quotes
+  </button>
+  <div style="margin-bottom:20px;">
+    <div class="page-title">Quote Details</div>
+    <div class="page-sub">View and manage the full details for this quote request</div>
+  </div>
+  <div style="background:#fff;border-radius:10px;border:0.5px solid #e2e5ea;padding:24px;">
+
+    <!-- Top 3-col summary strip -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:0.5px solid #e2e5ea;border-radius:8px;overflow:hidden;margin-bottom:24px;">
+      <div style="padding:16px 20px;border-right:0.5px solid #e2e5ea;">
+        <div style="font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px;">Quote No</div>
+        <div style="font-size:24px;font-weight:700;color:#1a1a2e;" id="qd-quote-nr-display"></div>
+      </div>
+      <div style="padding:16px 20px;border-right:0.5px solid #e2e5ea;">
+        <div style="font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px;">Quote Status</div>
+        <span class="status-pill s-approved" style="font-size:13px;">Opened</span>
+      </div>
+      <div style="padding:16px 20px;">
+        <div style="font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px;">Request Type</div>
+        <div style="font-size:16px;font-weight:600;color:#2d3748;">Direct Purchase</div>
+        <div style="font-size:12px;color:#718096;">Supply: 11/03/2026</div>
+      </div>
+    </div>
+
+  <div class="qd-grid">
+
+    <!-- General Info -->
+    <div class="qd-panel">
+      <div class="qd-panel-head">General Info</div>
+      <div class="qd-panel-body">
+        <div class="qd-row">
+          <span class="qd-label">Purchaser</span>
+          <div class="qd-val" id="qd-purchaser-block">
+            FlexiQuote Systems<br>15 Ellen St<br>Logan Central, QLD<br>Ph: 07 38082170
+          </div>
+        </div>
+        <div class="qd-row">
+          <span class="qd-label">Estimator</span>
+          <span class="qd-val">Uma</span>
+        </div>
+        <div class="qd-row">
+          <span class="qd-label">Reference</span>
+          <span class="qd-val">40413</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vehicle Info -->
+    <div class="qd-panel">
+      <div class="qd-panel-head">Vehicle Info</div>
+      <div class="qd-panel-body">
+        <div class="qd-row"><span class="qd-label">Make</span><span class="qd-val">Toyota</span></div>
+        <div class="qd-row"><span class="qd-label">Model</span><span class="qd-val">Corolla</span></div>
+        <div class="qd-row"><span class="qd-label">Model Nr</span><span class="qd-val"></span></div>
+        <div class="qd-row"><span class="qd-label">Series</span><span class="qd-val"></span></div>
+        <div class="qd-row"><span class="qd-label">Trans</span><span class="qd-val">A</span></div>
+        <div class="qd-row"><span class="qd-label">Colour</span><span class="qd-val">Mat Red</span></div>
+        <div class="qd-row"><span class="qd-label">VIN</span><span class="qd-val" style="font-family:monospace;font-size:12px;border:1px solid #bbb;padding:2px 6px;background:#f9f9f9;">MR053REH205309076</span></div>
+        <div class="qd-row"><span class="qd-label">Body</span><span class="qd-val">4 DOOR Sedan 4Door</span></div>
+        <div class="qd-row"><span class="qd-label">Mth/Yr</span><span class="qd-val">1/2025</span></div>
+        <div class="qd-row"><span class="qd-label">Veh Reg</span><span class="qd-val">55FHR</span></div>
+        <div class="qd-row"><span class="qd-label">Claim Nr</span><span class="qd-val">NRP05456200</span></div>
+      </div>
+    </div>
+
+    <!-- Required Info -->
+    <div class="qd-panel">
+      <div class="qd-panel-head">Required Info</div>
+      <div class="qd-panel-body">
+        <div class="qd-row"><span class="qd-label">Quote Nr</span><input class="qd-input" id="qd-quote-nr" type="text"></div>
+        <div class="qd-row"><span class="qd-label">Quote Expiry</span><input class="qd-input" type="text" value="27/04/2026"></div>
+        <div class="qd-row">
+          <span class="qd-label">Est. Delivery</span>
+          <select class="qd-select"><option>Next Day</option><option>2-3 Days</option><option>3-5 Days</option><option>1 Week+</option></select>
+        </div>
+        <div class="qd-checkbox-row"><input type="checkbox"> Set above estimate delivery as Default</div>
+        <div class="qd-optional-head">Optional Info</div>
+        <div style="padding-top:12px;">
+          <div class="qd-row"><span class="qd-label">Internal Status</span><select class="qd-select"><option>API Assigned</option><option>In Progress</option><option>Complete</option></select></div>
+          <div class="qd-row"><span class="qd-label">Sales Rep 🖊</span><select class="qd-select"><option>Not Selected</option><option>Jordan Mills</option></select></div>
+          <div class="qd-row"><span class="qd-label">Est. Freight</span><input class="qd-input" type="text" style="width:80px;"></div>
+          <div class="qd-row"><span class="qd-label">Settlement %</span><input class="qd-input" type="text" value="0.00" style="width:80px;"></div>
+          <div style="font-size:12px;color:#0000cc;text-decoration:underline;cursor:pointer;margin-top:-4px;">What is this?</div>
+          <div class="qd-row" style="margin-top:10px;"><span class="qd-label">Take Ownership</span><input type="checkbox"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </div><!-- end white box -->
+</div><!-- end page-quote-detail -->
 
 <div class="page" id="page-orders" style="display:none">
   <div class="page-header">
@@ -366,28 +478,28 @@ let currentTabData = [];
 const tabData = {
   get all() { return [...this.new, ...this.open, ...this.submitted]; },
   new: [
-    { due:'Apr 15, 2026', quote:'#QT-4821', purchaser:'Acme Corp',        status:'<span class="status-pill s-approved">New</span>', icons:[1,1,0,1] },
-    { due:'Apr 10, 2026', quote:'#QT-4820', purchaser:'Blue Giant LLC',   status:'<span class="status-pill s-approved">New</span>', icons:[1,1,1,1] },
-    { due:'Apr 5, 2026',  quote:'#QT-4818', purchaser:'Nexaflow Inc',     status:'<span class="status-pill s-approved">New</span>', icons:[1,0,0,1] },
-    { due:'Mar 30, 2026', quote:'#QT-4815', purchaser:'Pinnacle Works',   status:'<span class="status-pill s-approved">New</span>', icons:[0,1,0,0] },
-    { due:'Apr 20, 2026', quote:'#QT-4812', purchaser:'Stellar Tech',     status:'<span class="status-pill s-approved">New</span>', icons:[1,1,0,1] },
-    { due:'Mar 28, 2026', quote:'#QT-4810', purchaser:'Harbour Group',    status:'<span class="status-pill s-approved">New</span>', icons:[1,0,1,1] },
-    { due:'Mar 25, 2026', quote:'#QT-4808', purchaser:'Atlas Supply Co.', status:'<span class="status-pill s-approved">New</span>', icons:[1,1,1,0] },
-    { due:'Mar 22, 2026', quote:'#QT-4806', purchaser:'Drift Industries', status:'<span class="status-pill s-approved">New</span>', icons:[0,1,1,1] },
+    { due:'Apr 15, 2026', quote:'#10821', purchaser:'City Auto Repairs',      status:'<span class="status-pill s-approved">New</span>', icons:[1,1,0,1] },
+    { due:'Apr 10, 2026', quote:'#10820', purchaser:'FastFit Mechanical',     status:'<span class="status-pill s-approved">New</span>', icons:[1,1,1,1] },
+    { due:'Apr 5, 2026',  quote:'#10818', purchaser:'Northside Panel & Auto', status:'<span class="status-pill s-approved">New</span>', icons:[1,0,0,1] },
+    { due:'Mar 30, 2026', quote:'#10815', purchaser:'Prestige Auto Service',  status:'<span class="status-pill s-approved">New</span>', icons:[0,1,0,0] },
+    { due:'Apr 20, 2026', quote:'#10812', purchaser:'Westside Smash Repairs', status:'<span class="status-pill s-approved">New</span>', icons:[1,1,0,1] },
+    { due:'Mar 28, 2026', quote:'#10810', purchaser:'Harbour Auto Centre',    status:'<span class="status-pill s-approved">New</span>', icons:[1,0,1,1] },
+    { due:'Mar 25, 2026', quote:'#10808', purchaser:'All Makes Auto Repairs', status:'<span class="status-pill s-approved">New</span>', icons:[1,1,1,0] },
+    { due:'Mar 22, 2026', quote:'#10806', purchaser:'Drive Tech Automotive',  status:'<span class="status-pill s-approved">New</span>', icons:[0,1,1,1] },
   ],
   open: [
-    { due:'Apr 18, 2026', quote:'#QT-4830', purchaser:'Redline Co.',      status:'<span class="status-pill s-open">Open</span>', icons:[1,0,1,1] },
-    { due:'Apr 14, 2026', quote:'#QT-4828', purchaser:'Vertex Group',     status:'<span class="status-pill s-open">Open</span>', icons:[1,1,0,0] },
-    { due:'Apr 12, 2026', quote:'#QT-4826', purchaser:'Dyna Corp',        status:'<span class="status-pill s-open">Open</span>', icons:[0,1,1,1] },
-    { due:'Apr 9, 2026',  quote:'#QT-4824', purchaser:'Skyline Ltd.',     status:'<span class="status-pill s-open">Open</span>', icons:[1,1,1,0] },
-    { due:'Apr 7, 2026',  quote:'#QT-4822', purchaser:'Ironworks Inc.',   status:'<span class="status-pill s-open">Open</span>', icons:[1,0,0,0] },
-    { due:'Apr 4, 2026',  quote:'#QT-4860', purchaser:'Torque Systems',   status:'<span class="status-pill s-open">Open</span>', icons:[0,1,0,1] },
-    { due:'Apr 1, 2026',  quote:'#QT-4858', purchaser:'Nexus Brands',     status:'<span class="status-pill s-open">Open</span>', icons:[1,1,0,1] },
+    { due:'Apr 18, 2026', quote:'#10830', purchaser:'Redline Auto Repairs',   status:'<span class="status-pill s-open">Open</span>', icons:[1,0,1,1] },
+    { due:'Apr 14, 2026', quote:'#10828', purchaser:'Vertex Motor Group',     status:'<span class="status-pill s-open">Open</span>', icons:[1,1,0,0] },
+    { due:'Apr 12, 2026', quote:'#10826', purchaser:'Dynamic Auto Works',     status:'<span class="status-pill s-open">Open</span>', icons:[0,1,1,1] },
+    { due:'Apr 9, 2026',  quote:'#10824', purchaser:'Skyline Tyre & Service', status:'<span class="status-pill s-open">Open</span>', icons:[1,1,1,0] },
+    { due:'Apr 7, 2026',  quote:'#10822', purchaser:'Ironbridge Mechanics',   status:'<span class="status-pill s-open">Open</span>', icons:[1,0,0,0] },
+    { due:'Apr 4, 2026',  quote:'#10860', purchaser:'Torque Auto Services',   status:'<span class="status-pill s-open">Open</span>', icons:[0,1,0,1] },
+    { due:'Apr 1, 2026',  quote:'#10858', purchaser:'Nexus Auto Group',       status:'<span class="status-pill s-open">Open</span>', icons:[1,1,0,1] },
   ],
   submitted: [
-    { quote:'#QT-4840', purchaser:'Crest Holdings',  pquote:'#PQ-210', items:7,  you:8, comp:5 },
-    { quote:'#QT-4838', purchaser:'Orion Grp.',       pquote:'#PQ-208', items:12, you:3, comp:7 },
-    { quote:'#QT-4836', purchaser:'SkyBridge',        pquote:'#PQ-205', items:4,  you:6, comp:4 },
+    { quote:'#10840', purchaser:'City Auto Repairs',      pquote:'#48210', items:7,  you:8, comp:5 },
+    { quote:'#10838', purchaser:'FastFit Mechanical',     pquote:'#48208', items:12, you:3, comp:7 },
+    { quote:'#10836', purchaser:'Northside Panel & Auto', pquote:'#48205', items:4,  you:6, comp:4 },
   ],
 };
 
@@ -428,13 +540,21 @@ document.getElementById('submitted-tbody').innerHTML = renderSubmittedRows(tabDa
 })();
 
 function showPage(name) {
-  ['quotes','orders','credit','reports','tools'].forEach(p => {
+  ['quotes','quote-detail','orders','credit','reports','tools'].forEach(p => {
     document.getElementById('page-'+p).style.display = p===name?'block':'none';
   });
   document.querySelectorAll('.nav-item').forEach((el,i) => {
     const pages = ['quotes','orders','credit','reports','tools'];
     el.classList.toggle('active', pages[i]===name);
   });
+}
+
+function openQuoteDetail(quoteNum, purchaser) {
+  document.getElementById('qd-quote-nr').value = quoteNum.replace('#','');
+  document.getElementById('qd-quote-nr-display').textContent = quoteNum;
+  if (purchaser) document.getElementById('qd-purchaser-block').innerHTML = purchaser + '<br>15 Ellen St<br>Logan Central, QLD<br>Ph: 07 38082170';
+  showPage('quote-detail');
+  window.scrollTo(0,0);
 }
 
 function switchMainTab(btn, view) {
@@ -458,7 +578,7 @@ function filterSubmitted(val) {
 function renderSubmittedRows(data) {
   return data.map(r => `
     <tr>
-      <td style="font-weight:600;color:#0db14b;text-decoration:underline;">${r.quote}</td>
+      <td style="font-weight:700;color:#0db14b;text-decoration:underline;cursor:pointer;" onclick="openQuoteDetail('${r.quote}','${r.purchaser}')">${r.quote}</td>
       <td>${r.purchaser}</td>
       <td style="font-weight:600;color:#2d3748;">${r.pquote}</td>
       <td style="text-align:center;color:#2d3748;">${r.items}</td>
@@ -472,7 +592,7 @@ function renderRows(data) {
   return data.map(r => `
     <tr>
       <td>${r.due}</td>
-      <td style="font-weight:600;color:#0db14b;text-decoration:underline;">${r.quote}</td>
+      <td style="font-weight:700;color:#0db14b;text-decoration:underline;cursor:pointer;" onclick="openQuoteDetail('${r.quote}','${r.purchaser}')">${r.quote}</td>
       <td>${r.purchaser}</td>
       <td>${r.status}</td>
       <td style="white-space:nowrap;">${renderIcons(r.icons)}</td>
@@ -496,6 +616,30 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     this.classList.add('active');
   });
 });
+
+// ── Persist current page across auto-reloads ──
+const _origShowPage = showPage;
+window.showPage = function(name) {
+  sessionStorage.setItem('_page', name);
+  _origShowPage(name);
+};
+
+// Restore page on load (sessionStorage survives reload)
+const _savedPage = sessionStorage.getItem('_page');
+if (_savedPage) showPage(_savedPage);
+
+// ── Auto-refresh when file changes ──
+(function() {
+  let _lastLen = null;
+  setInterval(async () => {
+    try {
+      const r = await fetch(location.href + '?_=' + Date.now(), { cache: 'no-store' });
+      const text = await r.text();
+      if (_lastLen !== null && text.length !== _lastLen) location.reload();
+      _lastLen = text.length;
+    } catch(e) {}
+  }, 1200);
+})();
 </script>
 </body>
 </html>
