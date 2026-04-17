@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "static",
+      "runtimeExecutable": "powershell",
+      "runtimeArgs": ["-ExecutionPolicy", "Bypass", "-NoProfile", "-Command", "$p='5500';$l=New-Object System.Net.HttpListener;$l.Prefixes.Add('http://localhost:'+$p+'/');$l.Start();Write-Host 'Serving at http://localhost:'+$p+'/';$root=$PWD.Path;while($l.IsListening){$ctx=$l.GetContext();$path=$ctx.Request.Url.LocalPath;if($path -eq '/'){$path='/index.html'};$file=Join-Path $root $path.TrimStart('/');if(Test-Path $file -PathType Leaf){$bytes=[System.IO.File]::ReadAllBytes($file);$ext=[System.IO.Path]::GetExtension($file);$mime=if($ext -eq '.html'){'text/html'}elseif($ext -eq '.css'){'text/css'}elseif($ext -eq '.js'){'application/javascript'}elseif($ext -eq '.svg'){'image/svg+xml'}else{'application/octet-stream'};$ctx.Response.ContentType=$mime;try{$ctx.Response.ContentLength64=$bytes.Length;$ctx.Response.OutputStream.Write($bytes,0,$bytes.Length);$ctx.Response.OutputStream.Flush()}catch{}}else{$ctx.Response.StatusCode=404};try{$ctx.Response.Close()}catch{}}"],
+      "port": 5500
+    }
+  ]
+}

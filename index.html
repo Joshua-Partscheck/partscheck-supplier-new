@@ -3,144 +3,139 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Business Portal</title>
+<title>PartsCheck Supplier</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800;900&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0..1,0" />
 <style>
-  .material-symbols-outlined { font-size: 18px; vertical-align: middle; }
+  /* ── Reset ── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  .material-symbols-outlined { font-size: 18px; vertical-align: middle; }
   body { font-family: 'Open Sans', sans-serif; background: #f4f5f7; color: #1a1a2e; min-height: 100vh; }
 
-  /* TOP BAR */
+  /* ── Top Bar ── */
   .topbar { background: #242625; height: 48px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; position: sticky; top: 0; z-index: 100; }
   .topbar-brand { color: #fff; font-size: 15px; font-weight: 600; letter-spacing: 0.3px; display: flex; align-items: center; gap: 8px; }
-  .brand-dot { width: 8px; height: 8px; border-radius: 50%; background: #4f8ef7; }
   .topbar-right { display: flex; align-items: center; gap: 16px; }
-  .topbar-right .notif { position: relative; cursor: pointer; }
-  .notif-icon { font-size: 20px; color: rgba(255,255,255,0.75); }
+  .notif { position: relative; cursor: pointer; margin-right: 16px; }
+  .notif-icon { font-size: 26px; color: rgba(255,255,255,0.75); }
   .notif-badge { position: absolute; top: -4px; right: -4px; background: #e24b4a; color: #fff; font-size: 11px; font-weight: 700; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; }
-  .user-pill { display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 4px 10px 4px 4px; border-radius: 20px; border: 0.5px solid rgba(255,255,255,0.15); transition: background 0.15s; }
-  .user-pill:hover { background: rgba(255,255,255,0.08); }
-  .avatar { width: 28px; height: 28px; border-radius: 50%; background: #0db14b; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: #fff; }
-  .user-name { font-size: 13px; color: #d0d8e8; font-weight: 500; }
-  .chevron-down { color: #8899aa; font-size: 10px; }
+  .avatar { width: 28px; height: 28px; border-radius: 50%; background: #0db14b; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: #fff; cursor: pointer; }
 
-  /* NAV */
+  /* ── Nav ── */
   .navbar { background: #fff; border-bottom: 1px solid #e2e5ea; display: flex; align-items: stretch; padding: 0 24px; position: sticky; top: 48px; z-index: 90; }
   .nav-item { position: relative; display: flex; align-items: center; gap: 6px; padding: 0 16px; height: 52px; font-size: 13.5px; font-weight: 500; color: #4a5568; cursor: pointer; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; white-space: nowrap; }
   .nav-item:hover { color: #0db14b; }
   .nav-item.active { color: #0db14b; border-bottom-color: #0db14b; }
   .nav-icon { font-size: 16px; opacity: 0.7; }
   .nav-item.active .nav-icon { opacity: 1; }
-  .nav-item .caret { font-size: 9px; color: #a0aec0; margin-left: 2px; transition: transform 0.15s; }
-  .nav-item:hover .caret { color: #0db14b; }
 
-  /* DROPDOWN */
-  .dropdown { display: none; position: absolute; top: calc(100% + 1px); left: 0; background: #fff; border: 0.5px solid #e2e5ea; border-radius: 8px; padding: 6px 0; min-width: 200px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); z-index: 200; }
-  .nav-item:hover .dropdown { display: block; }
-  .dropdown a { display: flex; align-items: center; gap: 10px; padding: 9px 16px; font-size: 13px; color: #4a5568; text-decoration: none; transition: background 0.12s; }
-  .dropdown a:hover { background: #f0f4ff; color: #0db14b; }
-  .dropdown-divider { height: 0.5px; background: #e2e5ea; margin: 4px 0; }
-  .badge-new { background: #e6f1fb; color: #0db14b; font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px; }
+  /* ── Buttons ── */
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; font-size: 13px; font-weight: 500; border-radius: 7px; border: none; cursor: pointer; transition: all 0.15s; }
+  .btn-primary { background: #0db14b; color: #fff; }
+  .btn-primary:hover { background: #0a9a40; }
 
-  /* PAGE CONTENT */
+  /* ── Cards ── */
+  .card { background: #fff; border-radius: 10px; border: 0.5px solid #e2e5ea; overflow: hidden; }
+  .card-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; border-bottom: 0.5px solid #e2e5ea; }
+  .card-title { font-size: 14px; font-weight: 600; color: #1a1a2e; }
+
+  /* ── Pages ── */
   .page { padding: 28px 24px; }
   .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
   .page-title { font-size: 1.5rem; font-weight: 600; color: #1a1a2e; }
   .page-sub { font-size: 13px; color: #718096; margin-top: 2px; }
-  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; font-size: 13px; font-weight: 500; border-radius: 7px; border: none; cursor: pointer; transition: all 0.15s; }
-  .btn-primary { background: #0db14b; color: #fff; }
-  .btn-primary:hover { background: #0C447C; }
-  .btn-outline { background: #fff; color: #4a5568; border: 0.5px solid #d0d5dd; }
-  .btn-outline:hover { background: #f8fafc; }
 
-  /* STATS */
+  /* ── Stat Cards ── */
   .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }
-  .stat-card { background: #fff; border-radius: 10px; border: 0.5px solid #e2e5ea; padding: 16px 18px; }
+  .stat-card { position: relative; background: #fff; border-radius: 10px; border: 0.5px solid #e2e5ea; padding: 16px 18px; }
+  .stat-bar { position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 3px; height: 48px; border-radius: 0 2px 2px 0; }
   .stat-label { font-size: 12px; color: #718096; font-weight: 500; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 8px; }
   .stat-value { font-size: 26px; font-weight: 600; color: #1a1a2e; line-height: 1; }
-  .stat-delta { font-size: 12px; margin-top: 6px; display: flex; align-items: center; gap: 4px; }
-  .delta-up { color: #3B6D11; }
-  .delta-down { color: #993C1D; }
-  .stat-accent { width: 3px; height: 40px; border-radius: 2px; position: absolute; left: 0; top: 50%; transform: translateY(-50%); }
-  .stat-card { position: relative; }
 
-  /* TABLE */
-  .card { background: #fff; border-radius: 10px; border: 0.5px solid #e2e5ea; overflow: hidden; }
-  .card-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 0.5px solid #e2e5ea; }
-  .card-title { font-size: 14px; font-weight: 600; color: #1a1a2e; }
-  .filter-row { display: flex; gap: 8px; }
-  .filter-btn { padding: 0 14px; height: 30px; font-size: 12px; font-weight: 600; border: 1.5px solid #c4c9d0; background: #fff; color: #718096; cursor: pointer; transition: background 0.15s, color 0.15s, border-color 0.15s; display: inline-flex; align-items: center; border-radius: 50px; }
-  .filter-btn:hover { background: #e6f7ee; color: #0db14b; border-color: #0db14b; }
-  .filter-btn.active { background: #e6f7ee; color: #0db14b; border-color: #0db14b; }
-  .filter-btn span { background: #e8eaed !important; color: #4a5568 !important; }
-  .filter-btn.active span { background: #0db14b !important; color: #fff !important; }
-  .filter-btn:hover span { background: #0db14b !important; color: #fff !important; }
+  /* ── Status Pills ── */
+  .status-pill { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 20px; font-size: 11.5px; font-weight: 500; }
+  .s-approved  { background: #0db14b; color: #fff; }
+  .s-pending   { background: #d97706; color: #fff; }
+  .s-declined  { background: #dc2626; color: #fff; }
+  .s-review    { background: #2563eb; color: #fff; }
+  .s-open      { background: #7c3aed; color: #fff; }
+  .s-submitted { background: #b45309; color: #fff; }
+
+  /* ── Tables ── */
   table { width: 100%; border-collapse: collapse; font-size: 13px; table-layout: fixed; }
   thead tr { background: #f8fafc; }
-  #quotes-thead th { background: #f8fafc; border-bottom: none; }
-  #quotes-table { border-collapse: separate; border-spacing: 0; }
-  #quotes-thead, #submitted-thead { transition: box-shadow 0.2s; }
-  #quotes-thead.scrolled, #submitted-thead.scrolled { box-shadow: 0 2px 8px rgba(0,0,0,0.10); clip-path: inset(0 0 -10px 0); }
-  #submitted-thead th { background: #f8fafc; border-bottom: none; }
   th { padding: 10px 16px; text-align: left; font-size: 11.5px; font-weight: 600; color: #718096; text-transform: uppercase; letter-spacing: 0.4px; border-bottom: 0.5px solid #e2e5ea; }
   td { padding: 13px 16px; border-bottom: 0.5px solid #f0f2f5; color: #2d3748; }
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: #fafbff; }
-  .status-pill { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 20px; font-size: 11.5px; font-weight: 500; }
-  .s-approved { background: #0db14b; color: #fff; }
-  .s-pending { background: #d97706; color: #fff; }
-  .s-declined { background: #dc2626; color: #fff; }
-  .s-review { background: #2563eb; color: #fff; }
-  .s-open { background: #7c3aed; color: #fff; }
-  .s-submitted { background: #b45309; color: #fff; }
-  .company-cell { display: flex; align-items: center; gap: 10px; }
-  .co-avatar { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
   .action-link { color: #0db14b; font-size: 12px; cursor: pointer; text-decoration: none; }
   .action-link:hover { text-decoration: underline; }
-  .view-tab-bar { display:flex; border-bottom:1.5px solid #e2e5ea; padding:0 20px; }
-  .view-tab { padding:14px 4px; margin-right:24px; font-size:13.5px; font-weight:400; color:#718096; cursor:pointer; border:none; background:none; border-bottom:2.5px solid transparent; margin-bottom:-1.5px; transition:color 0.15s,border-color 0.15s; display:inline-flex; align-items:center; gap:8px; }
-  .view-tab.active { color:#0db14b; border-bottom-color:#0db14b; }
-  .view-tab span { font-size:11px; font-weight:700; padding:2px 8px; border-radius:50px; background:#e2e5ea; color:#718096; }
-  .view-tab.active span { background:#0db14b; color:#fff; }
+  input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; accent-color: #4f8ef7; vertical-align: middle; flex-shrink: 0; }
+  select { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cpath fill='%231a1a2e' d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: calc(100% - 10px) center; background-color: #fff; }
 
-  /* QUOTE DETAIL */
-input[type="checkbox"] { width:16px; height:16px; cursor:pointer; accent-color:#4f8ef7; vertical-align:middle; flex-shrink:0; }
-  .type-req-cb { width:16px !important; height:16px !important; }
-  .parts-table input[type="text"], .parts-table input[type="number"] { width:100%; border:0.5px solid #e2e5ea; border-radius:4px; padding:4px 6px; font-size:13px; color:#2d3748; background:#fff; outline:none; box-sizing:border-box; }
-  .parts-table input[type="text"]:focus, .parts-table input[type="number"]:focus { border-color:#0db14b; }
-  .parts-table input[type="number"] { -moz-appearance:textfield; }
-  .parts-table input[type="number"]::-webkit-outer-spin-button, .parts-table input[type="number"]::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
-  .add-notes-btn { font-size:11px; font-weight:600; color:#0db14b; border:0.5px solid #0db14b; background:#fff; border-radius:4px; padding:4px 10px; cursor:pointer; white-space:nowrap; }
-  .add-notes-btn:hover { background:#f0faf4; }
-  .qd-back { display:inline-flex; align-items:center; gap:6px; font-size:13px; color:#0db14b; cursor:pointer; margin-bottom:16px; font-weight:500; background:none; border:none; padding:0; vertical-align:middle; }
-  .qd-back:hover { text-decoration:underline; }
-  .qd-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; }
-  .qd-panel { background:transparent; border-right:0.5px solid #e2e5ea; padding:0 24px 20px; }
-  .qd-panel:first-child { padding-left:0; }
-  .qd-panel:last-child { border-right:none; }
-  .qd-panel-head { color:#718096; font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:0.5px; padding:0 0 8px; margin-bottom:14px; border-bottom:0.5px solid #e2e5ea; }
-  .qd-panel-body { padding:0; }
-  .qd-row { display:flex; flex-direction:column; gap:6px; margin-bottom:16px; font-size:13px; }
-  .qd-row:last-child { margin-bottom:0; }
-  .qd-label { font-weight:600; color:#1a1a2e; font-size:13px; }
-  .qd-val { color:#333; font-size:16px; }
-  .qd-input { border:0.5px solid #e2e5ea; padding:3px 6px; font-size:13px; font-family:'Open Sans',sans-serif; width:120px; border-radius:4px; }
-  select { appearance:none; -webkit-appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cpath fill='%231a1a2e' d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:calc(100% - 10px) center; background-color:#fff; }
-  .qd-select { border:0.5px solid #e2e5ea; padding:3px 28px 3px 6px; font-size:13px; font-family:'Open Sans',sans-serif; border-radius:4px; }
-  .qd-optional-head { color:#718096; font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:0.5px; padding:0 0 8px; margin:18px 0 14px; border-bottom:0.5px solid #e2e5ea; }
-  .qd-checkbox-row { display:flex; align-items:center; gap:6px; font-size:12px; color:#444; font-style:italic; margin-top:8px; }
+  /* ── Quotes page tabs & filters ── */
+  .view-tab-bar { display: flex; border-bottom: 1.5px solid #e2e5ea; padding: 0 20px; }
+  .view-tab { padding: 14px 4px; margin-right: 24px; font-size: 13.5px; font-weight: 400; color: #718096; cursor: pointer; border: none; background: none; border-bottom: 2.5px solid transparent; margin-bottom: -1.5px; transition: color 0.15s, border-color 0.15s; display: inline-flex; align-items: center; gap: 8px; }
+  .view-tab.active { color: #0db14b; border-bottom-color: #0db14b; }
+  .view-tab span { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 50px; background: #e2e5ea; color: #718096; }
+  .view-tab.active span { background: #0db14b; color: #fff; }
 
-  /* QUICK ACCESS */
-  .two-col { display: grid; grid-template-columns: 1fr 340px; gap: 14px; margin-top: 14px; }
-  .quick-list { list-style: none; }
-  .quick-list li { display: flex; align-items: center; justify-content: space-between; padding: 11px 0; border-bottom: 0.5px solid #f0f2f5; font-size: 13px; color: #4a5568; }
-  .quick-list li:last-child { border-bottom: none; }
-  .quick-badge { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+  .filter-btn { padding: 0 14px; height: 30px; font-size: 12px; font-weight: 600; border: 1.5px solid #c4c9d0; background: #fff; color: #718096; cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; border-radius: 50px; }
+  .filter-btn:hover, .filter-btn.active { background: #e6f7ee; color: #0db14b; border-color: #0db14b; }
+  .filter-btn span { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 50px; margin-left: 7px; display: inline-block; min-width: 28px; text-align: center; background: #e8eaed; color: #4a5568; }
+  .filter-btn.active span, .filter-btn:hover span { background: #0db14b; color: #fff; }
+
+  #quotes-table { border-collapse: separate; border-spacing: 0; }
+  #quotes-thead, #submitted-thead { transition: box-shadow 0.2s; }
+  #quotes-thead.scrolled, #submitted-thead.scrolled { box-shadow: 0 2px 8px rgba(0,0,0,0.10); clip-path: inset(0 0 -10px 0); }
+  #quotes-thead th, #submitted-thead th { background: #f8fafc; border-bottom: none; }
+
+  /* ── Quote Detail ── */
+  .qd-back { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #0db14b; cursor: pointer; margin-bottom: 16px; font-weight: 500; background: none; border: none; padding: 0; }
+  .qd-back:hover { text-decoration: underline; }
+
+  .qd-summary-row { display: flex; align-items: stretch; padding-bottom: 20px; border-bottom: 0.5px solid #e2e5ea; }
+  .qd-summary-divider { width: 0.5px; background: #e2e5ea; margin: 0 32px 0 0; flex-shrink: 0; }
+  .qd-field { display: flex; flex-direction: column; gap: 6px; padding-right: 32px; }
+  .qd-field-label { display: block; height: 18px; line-height: 18px; font-weight: 600; color: #1a1a2e; font-size: 13px; }
+  .qd-field-val { color: #333; font-size: 14px; }
+
+  .qd-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; padding-top: 20px; }
+  .qd-panel { border-right: 0.5px solid #e2e5ea; padding: 0 24px 20px; }
+  .qd-panel:first-child { padding-left: 0; }
+  .qd-panel:last-child { border-right: none; }
+  .qd-panel-head { color: #718096; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; padding-bottom: 8px; margin-bottom: 14px; border-bottom: 0.5px solid #e2e5ea; }
+
+  .qd-row { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; font-size: 13px; }
+  .qd-row:last-child { margin-bottom: 0; }
+  .qd-label { font-weight: 600; color: #1a1a2e; font-size: 13px; }
+  .qd-val { color: #333; font-size: 13px; }
+  .qd-input { border: 0.5px solid #e2e5ea; padding: 3px 6px; font-size: 13px; font-family: 'Open Sans', sans-serif; width: 100%; border-radius: 4px; outline: none; }
+  .qd-select { border: 0.5px solid #e2e5ea; padding: 3px 28px 3px 6px; font-size: 13px; font-family: 'Open Sans', sans-serif; border-radius: 4px; outline: none; }
+
+  /* ── Parts Table ── */
+  .parts-table { border: 0.5px solid #e2e5ea; border-radius: 8px; overflow: hidden; }
+  .parts-table table { border-collapse: collapse; }
+  .parts-table th { padding: 10px 12px; font-size: 11px; }
+  .parts-table td { padding: 8px 12px; border-bottom: 0.5px solid #f0f2f5; }
+  .parts-table tr:last-child td { border-bottom: none; }
+  .parts-table td.center { text-align: center; }
+  .parts-table input[type="text"],
+  .parts-table input[type="number"] { width: 100%; border: 0.5px solid #e2e5ea; border-radius: 4px; padding: 4px 6px; font-size: 13px; color: #2d3748; background: #fff; outline: none; font-family: 'Open Sans', sans-serif; }
+  .parts-table input[type="text"]:focus,
+  .parts-table input[type="number"]:focus { border-color: #0db14b; }
+  .parts-table input[type="number"] { -moz-appearance: textfield; text-align: center; width: 40px; margin: 0 auto; display: block; }
+  .parts-table input[type="number"]::-webkit-outer-spin-button,
+  .parts-table input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .parts-delivery-sel { width: 100%; border: 0.5px solid #e2e5ea; border-radius: 4px; padding: 4px 28px 4px 6px; font-size: 12px; color: #2d3748; outline: none; font-family: 'Open Sans', sans-serif; }
+  .add-notes-btn { font-size: 11px; font-weight: 600; color: #0db14b; border: 0.5px solid #0db14b; background: #fff; border-radius: 4px; padding: 4px 10px; cursor: pointer; white-space: nowrap; }
+  .add-notes-btn:hover { background: #f0faf4; }
+  .type-req-group { display: flex; justify-content: center; gap: 14px; }
+  .type-req-group span { display: inline-flex; justify-content: center; width: 28px; }
 </style>
 </head>
 <body>
 
-<!-- TOP IDENTITY BAR -->
+<!-- ── Top Bar ── -->
 <div class="topbar">
   <div class="topbar-brand">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="45 196 490 75" style="height:22px;width:auto;" aria-label="PartsCheck">
@@ -161,60 +156,49 @@ input[type="checkbox"] { width:16px; height:16px; cursor:pointer; accent-color:#
       <path class="lst1" d="M467.1,246.4c0,4.2,1.4,6.7,6.8,6.7s8.3-.4,12.5-1.2l1.5,9.5c-4.8,1-9.2,1.5-14.1,1.5-12.2,0-17.7-6-17.7-14.9v-20.3c0-8.8,5.5-14.9,17.7-14.9s9.3.5,14.1,1.5l-1.5,9.5c-4.2-.7-9-1.2-12.5-1.2-5.4,0-6.8,2.5-6.8,6.7v16.8Z"/>
       <path class="lst1" d="M493.8,213.8h10.9v48.5h-10.9v-48.5ZM506.1,237.5l13.1-23.8h12.3l-13.6,23.8,14.6,24.8h-12.3l-14.1-24.8Z"/>
     </svg>
-    <span style="width:1px;height:22px;background:rgba(255,255,255,0.35);margin:0 10px;flex-shrink:0;align-self:center;"></span>
+    <span style="width:1px;height:22px;background:rgba(255,255,255,0.35);margin:0 10px;flex-shrink:0;"></span>
     <span style="font-size:13px;font-weight:500;color:#fff;letter-spacing:0.3px;">Supplier</span>
   </div>
   <div class="topbar-right">
-    <div class="notif" style="margin-right:16px;">
-      <span class="material-symbols-outlined notif-icon" style="font-size:26px;">notifications</span>
+    <div class="notif">
+      <span class="material-symbols-outlined notif-icon">notifications</span>
       <div class="notif-badge">4</div>
     </div>
-    <div class="avatar" style="cursor:pointer;">JM</div>
+    <div class="avatar">JM</div>
   </div>
 </div>
 
-<!-- MAIN NAV -->
+<!-- ── Main Nav ── -->
 <nav class="navbar">
-
   <div class="nav-item active" onclick="showPage('quotes')">
-    <span class="material-symbols-outlined nav-icon">request_quote</span>
-    Quotes
+    <span class="material-symbols-outlined nav-icon">request_quote</span> Quotes
   </div>
-
   <div class="nav-item" onclick="showPage('orders')">
-    <span class="material-symbols-outlined nav-icon">shopping_cart</span>
-    My Orders
+    <span class="material-symbols-outlined nav-icon">shopping_cart</span> My Orders
   </div>
-
   <div class="nav-item" onclick="showPage('credit')">
-    <span class="material-symbols-outlined nav-icon">credit_card</span>
-    Credit Management
+    <span class="material-symbols-outlined nav-icon">credit_card</span> Credit Management
   </div>
-
   <div class="nav-item" onclick="showPage('reports')">
-    <span class="material-symbols-outlined nav-icon">bar_chart</span>
-    Reports
+    <span class="material-symbols-outlined nav-icon">bar_chart</span> Reports
   </div>
-
   <div class="nav-item" onclick="showPage('tools')">
-    <span class="material-symbols-outlined nav-icon">handyman</span>
-    Tools
+    <span class="material-symbols-outlined nav-icon">handyman</span> Tools
   </div>
-
 </nav>
 
-<!-- PAGE CONTENT -->
+
+<!-- ════════════ QUOTES PAGE ════════════ -->
 <div class="page" id="page-quotes" style="padding:0;">
 
-  <!-- ── Single sticky header block ── -->
+  <!-- Sticky header -->
   <div id="quotes-sticky-block" style="position:sticky;top:100px;z-index:80;background:#f4f5f7;padding:28px 24px 0;">
     <div style="margin-bottom:16px;">
       <div class="page-title">Quotes</div>
       <div class="page-sub">Manage and track all your quotes</div>
     </div>
-    <div style="background:#fff;border-radius:10px 10px 0 0;border:0.5px solid #e2e5ea;">
 
-      <!-- View tabs -->
+    <div style="background:#fff;border-radius:10px 10px 0 0;border:0.5px solid #e2e5ea;">
       <div class="view-tab-bar">
         <button class="view-tab active" onclick="switchMainTab(this,'incoming')">Incoming Quotes <span id="count-incoming-tab">16</span></button>
         <button class="view-tab" onclick="switchMainTab(this,'submitted')">Submitted Quotes <span id="count-submitted-tab">3</span></button>
@@ -222,226 +206,219 @@ input[type="checkbox"] { width:16px; height:16px; cursor:pointer; accent-color:#
 
       <!-- Incoming header -->
       <div id="incoming-header">
-        <div class="card-header" id="quotes-card-header">
-          <div style="display:flex;align-items:center;gap:10px;">
-            <div style="display:flex;align-items:center;gap:6px;border:1.5px solid #c4c9d0;border-radius:6px;padding:0 12px;height:30px;background:#fff;">
-              <span class="material-symbols-outlined" style="font-size:16px;color:#a0aec0;">search</span>
-              <input type="text" placeholder="Search quotes…" style="border:none;outline:none;font-size:12px;font-family:'Open Sans',sans-serif;color:#2d3748;background:transparent;width:140px;" oninput="filterSearch(this.value)">
-            </div>
+        <div class="card-header">
+          <div style="display:flex;align-items:center;gap:6px;border:1.5px solid #c4c9d0;border-radius:6px;padding:0 12px;height:30px;background:#fff;">
+            <span class="material-symbols-outlined" style="font-size:16px;color:#a0aec0;">search</span>
+            <input type="text" placeholder="Search quotes…" style="border:none;outline:none;font-size:12px;font-family:'Open Sans',sans-serif;color:#2d3748;background:transparent;width:140px;" oninput="filterSearch(this.value)">
           </div>
-          <div class="filter-row" style="align-items:center;">
-            <button class="filter-btn" onclick="switchTab(this,'all')">All <span id="count-all" style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:50px;margin-left:7px;display:inline-block;min-width:28px;text-align:center;">15</span></button>
-            <button class="filter-btn active" onclick="switchTab(this,'new')">New Quotes <span id="count-new" style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:50px;margin-left:7px;display:inline-block;min-width:28px;text-align:center;">5</span></button>
-            <button class="filter-btn" onclick="switchTab(this,'open')">Opened Quotes <span id="count-open" style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:50px;margin-left:7px;display:inline-block;min-width:28px;text-align:center;">5</span></button>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <button class="filter-btn" onclick="switchTab(this,'all')">All <span id="count-all">15</span></button>
+            <button class="filter-btn active" onclick="switchTab(this,'new')">New Quotes <span id="count-new">5</span></button>
+            <button class="filter-btn" onclick="switchTab(this,'open')">Opened Quotes <span id="count-open">5</span></button>
           </div>
         </div>
-        <table id="quotes-table" style="width:100%;table-layout:fixed;border-collapse:separate;border-spacing:0;font-size:13px;">
-          <thead id="quotes-thead"><tr><th style="width:16.6%">Due</th><th style="width:16.6%">Quote</th><th style="width:16.6%">Purchaser</th><th style="width:16.6%">Status</th><th style="width:16.6%">Other Suppliers</th><th style="width:16.6%;text-align:center;">Actions</th></tr></thead>
+        <table id="quotes-table" style="table-layout:fixed;border-collapse:separate;border-spacing:0;">
+          <thead id="quotes-thead">
+            <tr>
+              <th style="width:16.6%">Due</th>
+              <th style="width:16.6%">Quote</th>
+              <th style="width:16.6%">Purchaser</th>
+              <th style="width:16.6%">Status</th>
+              <th style="width:16.6%">Other Suppliers</th>
+              <th style="width:16.6%;text-align:center;">Actions</th>
+            </tr>
+          </thead>
         </table>
       </div>
 
       <!-- Submitted header -->
-      <div id="submitted-header" style="display:none">
+      <div id="submitted-header" style="display:none;">
         <div class="card-header">
           <div style="display:flex;align-items:center;gap:6px;border:1.5px solid #c4c9d0;border-radius:6px;padding:0 12px;height:30px;background:#fff;">
             <span class="material-symbols-outlined" style="font-size:16px;color:#a0aec0;">search</span>
             <input type="text" placeholder="Search submitted…" style="border:none;outline:none;font-size:12px;font-family:'Open Sans',sans-serif;color:#2d3748;background:transparent;width:160px;" oninput="filterSubmitted(this.value)">
           </div>
         </div>
-        <table style="width:100%;table-layout:fixed;border-collapse:separate;border-spacing:0;font-size:13px;">
-          <thead id="submitted-thead"><tr><th style="width:22%">Quote</th><th style="width:22%">Purchaser</th><th style="width:18%">P.Quote</th><th style="width:10%;text-align:center;">Items</th><th style="width:9%;text-align:center;">YOU</th><th style="width:9%;text-align:center;">COMP</th><th style="width:10%;text-align:center;">Actions</th></tr></thead>
+        <table style="table-layout:fixed;border-collapse:separate;border-spacing:0;">
+          <thead id="submitted-thead">
+            <tr>
+              <th style="width:22%">Quote</th>
+              <th style="width:22%">Purchaser</th>
+              <th style="width:18%">P.Quote</th>
+              <th style="width:10%;text-align:center;">Items</th>
+              <th style="width:9%;text-align:center;">YOU</th>
+              <th style="width:9%;text-align:center;">COMP</th>
+              <th style="width:10%;text-align:center;">Actions</th>
+            </tr>
+          </thead>
         </table>
       </div>
-
     </div>
   </div>
 
-  <!-- ── Incoming scrollable rows ── -->
+  <!-- Incoming rows -->
   <div id="incoming-rows-wrap" style="background:#fff;border:0.5px solid #e2e5ea;border-top:none;border-radius:0 0 10px 10px;margin:0 24px 28px;">
-    <table style="width:100%;table-layout:fixed;border-collapse:separate;border-spacing:0;font-size:13px;">
-      <colgroup><col style="width:16.6%"><col style="width:16.6%"><col style="width:16.6%"><col style="width:16.6%"><col style="width:16.6%"><col style="width:16.6%"></colgroup>
-      <tbody id="quotes-tbody">
-        <tr>
-          <td>Apr 15, 2026</td>
-          <td style="font-weight:700;color:#0db14b;text-decoration:underline;cursor:pointer;" onclick="openQuoteDetail('#10821','City Auto Repairs')">#10821</td>
-          <td>Acme Corp</td>
-          <td><span class="status-pill s-approved">New</span></td>
-          <td style="white-space:nowrap;"><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#e07b00;font-variation-settings:'FILL' 1;margin-right:10px;">error</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span></td>
-          <td style="text-align:center;"><a class="action-link" title="Print"><span class="material-symbols-outlined" style="font-size:18px;">print</span></a></td>
-        </tr>
-        <tr>
-          <td>Apr 10, 2026</td>
-          <td style="font-weight:700;color:#0db14b;text-decoration:underline;cursor:pointer;" onclick="openQuoteDetail('#10820','FastFit Mechanical')">#10820</td>
-          <td>Blue Giant LLC</td>
-          <td><span class="status-pill s-approved">New</span></td>
-          <td style="white-space:nowrap;"><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span></td>
-          <td style="text-align:center;"><a class="action-link" title="Print"><span class="material-symbols-outlined" style="font-size:18px;">print</span></a></td>
-        </tr>
-        <tr>
-          <td>Apr 5, 2026</td>
-          <td style="font-weight:700;color:#0db14b;text-decoration:underline;cursor:pointer;" onclick="openQuoteDetail('#10818','Northside Panel &amp; Auto')">#10818</td>
-          <td>Nexaflow Inc</td>
-          <td><span class="status-pill s-approved">New</span></td>
-          <td style="white-space:nowrap;"><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#e07b00;font-variation-settings:'FILL' 1;margin-right:10px;">error</span><span class="material-symbols-outlined" style="font-size:20px;color:#e07b00;font-variation-settings:'FILL' 1;margin-right:10px;">error</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span></td>
-          <td style="text-align:center;"><a class="action-link" title="Print"><span class="material-symbols-outlined" style="font-size:18px;">print</span></a></td>
-        </tr>
-        <tr>
-          <td>Mar 30, 2026</td>
-          <td style="font-weight:700;color:#0db14b;text-decoration:underline;cursor:pointer;" onclick="openQuoteDetail('#10815','Prestige Auto Service')">#10815</td>
-          <td>Pinnacle Works</td>
-          <td><span class="status-pill s-approved">New</span></td>
-          <td style="white-space:nowrap;"><span class="material-symbols-outlined" style="font-size:20px;color:#e07b00;font-variation-settings:'FILL' 1;margin-right:10px;">error</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#e07b00;font-variation-settings:'FILL' 1;margin-right:10px;">error</span><span class="material-symbols-outlined" style="font-size:20px;color:#e07b00;font-variation-settings:'FILL' 1;margin-right:10px;">error</span></td>
-          <td style="text-align:center;"><a class="action-link" title="Print"><span class="material-symbols-outlined" style="font-size:18px;">print</span></a></td>
-        </tr>
-        <tr>
-          <td>Apr 20, 2026</td>
-          <td style="font-weight:700;color:#0db14b;text-decoration:underline;cursor:pointer;" onclick="openQuoteDetail('#10812','Westside Smash Repairs')">#10812</td>
-          <td>Stellar Tech</td>
-          <td><span class="status-pill s-approved">New</span></td>
-          <td style="white-space:nowrap;"><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span><span class="material-symbols-outlined" style="font-size:20px;color:#e07b00;font-variation-settings:'FILL' 1;margin-right:10px;">error</span><span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span></td>
-          <td style="text-align:center;"><a class="action-link" title="Print"><span class="material-symbols-outlined" style="font-size:18px;">print</span></a></td>
-        </tr>
-      </tbody>
+    <table style="table-layout:fixed;border-collapse:separate;border-spacing:0;">
+      <colgroup>
+        <col style="width:16.6%"><col style="width:16.6%"><col style="width:16.6%">
+        <col style="width:16.6%"><col style="width:16.6%"><col style="width:16.6%">
+      </colgroup>
+      <tbody id="quotes-tbody"></tbody>
     </table>
   </div>
 
-  <!-- ── Submitted scrollable rows ── -->
+  <!-- Submitted rows -->
   <div id="submitted-rows-wrap" style="display:none;background:#fff;border:0.5px solid #e2e5ea;border-top:none;border-radius:0 0 10px 10px;margin:0 24px 28px;">
-    <table style="width:100%;table-layout:fixed;border-collapse:separate;border-spacing:0;font-size:13px;">
-      <colgroup><col style="width:22%"><col style="width:22%"><col style="width:18%"><col style="width:10%"><col style="width:9%"><col style="width:9%"><col style="width:10%"></colgroup>
+    <table style="table-layout:fixed;border-collapse:separate;border-spacing:0;">
+      <colgroup>
+        <col style="width:22%"><col style="width:22%"><col style="width:18%">
+        <col style="width:10%"><col style="width:9%"><col style="width:9%"><col style="width:10%">
+      </colgroup>
       <tbody id="submitted-tbody"></tbody>
     </table>
   </div>
 
 </div><!-- end page-quotes -->
 
+
+<!-- ════════════ QUOTE DETAIL PAGE ════════════ -->
 <div class="page" id="page-quote-detail" style="display:none;padding:16px 24px 28px;">
+
   <button class="qd-back" onclick="showPage('quotes')">
     <span class="material-symbols-outlined" style="font-size:16px;">arrow_back</span> Back to Quotes
   </button>
+
+  <!-- Quote info card -->
   <div style="background:#fff;border-radius:10px;border:0.5px solid #e2e5ea;overflow:hidden;">
-  <div style="font-size:1.25rem;font-weight:600;color:#1a1a2e;background:#f8fafc;padding:10px 24px;border-bottom:0.5px solid #e2e5ea;">Quote Details</div>
-  <div style="padding:24px;">
+    <div style="font-size:1.1rem;font-weight:600;color:#1a1a2e;background:#f8fafc;padding:10px 24px;border-bottom:0.5px solid #e2e5ea;">Quote Details</div>
+    <div style="padding:24px;">
 
-  <!-- Quote summary row -->
-  <div style="display:flex;align-items:stretch;margin-bottom:0;padding-bottom:20px;border-bottom:0.5px solid #e2e5ea;">
-    <div class="qd-row" style="margin-bottom:0;padding-right:32px;">
-      <span class="qd-label">Quote No</span>
-      <div style="font-size:18px;font-weight:700;color:#1a1a2e;" id="qd-quote-nr-display">#10821</div>
-    </div>
-    <div style="width:0.5px;background:#e2e5ea;margin:0 32px 0 0;"></div>
-    <div class="qd-row" style="margin-bottom:0;padding-right:32px;">
-      <span class="qd-label">Quote Expiry</span>
-      <input type="date" value="2026-04-27" style="border:0.5px solid #e2e5ea;border-radius:4px;padding:3px 6px;font-size:13px;font-family:'Open Sans',sans-serif;color:#2d3748;outline:none;">
-    </div>
-    <div style="width:0.5px;background:#e2e5ea;margin:0 32px 0 0;"></div>
-    <div class="qd-row" style="margin-bottom:0;padding-right:32px;">
-      <span class="qd-label">Required By</span>
-      <div class="qd-val">11/03/2026 <span style="font-size:12px;color:#718096;">9:00 AM</span></div>
-    </div>
-    <div style="width:0.5px;background:#e2e5ea;margin:0 32px 0 0;"></div>
-    <div class="qd-row" style="margin-bottom:0;padding-right:32px;">
-      <span class="qd-label">Order Status</span>
-      <span class="status-pill s-pending" style="font-size:13px;padding:2px 10px;line-height:1.2;align-self:flex-start;">Late Submission</span>
-    </div>
-    <div style="width:0.5px;background:#e2e5ea;margin:0 32px 0 0;"></div>
-    <div class="qd-row" style="margin-bottom:0;">
-      <span class="qd-label">Quote Status</span>
-      <span class="status-pill s-approved" style="font-size:13px;padding:2px 10px;line-height:1.2;align-self:flex-start;">Opened</span>
-    </div>
-  </div>
+      <!-- Summary row -->
+      <div class="qd-summary-row">
+        <div class="qd-field">
+          <span class="qd-field-label">Quote No <span style="color:#e53e3e;">*</span></span>
+          <input type="text" id="qd-quote-nr-display" required value="#10821"
+            style="font-size:14px;color:#1a1a2e;border:0.5px solid #e2e5ea;border-radius:4px;padding:3px 6px;font-family:'Open Sans',sans-serif;outline:none;width:120px;">
+        </div>
+        <div class="qd-summary-divider"></div>
+        <div class="qd-field">
+          <span class="qd-field-label">Quote Expiry</span>
+          <input type="date" value="2026-04-27"
+            style="font-size:14px;border:0.5px solid #e2e5ea;border-radius:4px;padding:3px 6px;font-family:'Open Sans',sans-serif;color:#2d3748;outline:none;">
+        </div>
+        <div class="qd-summary-divider"></div>
+        <div class="qd-field">
+          <span class="qd-field-label">Required By</span>
+          <div class="qd-field-val">11/03/2026 <span style="font-size:12px;color:#718096;">9:00 AM</span></div>
+        </div>
+        <div class="qd-summary-divider"></div>
+        <div class="qd-field">
+          <span class="qd-field-label">Order Status</span>
+          <span class="status-pill s-pending" style="font-size:13px;padding:2px 10px;align-self:flex-start;">Late Submission</span>
+        </div>
+        <div class="qd-summary-divider"></div>
+        <div class="qd-field" style="padding-right:0;">
+          <span class="qd-field-label">Quote Status</span>
+          <span class="status-pill s-approved" style="font-size:13px;padding:2px 10px;align-self:flex-start;">Opened</span>
+        </div>
+      </div>
 
-  <div class="qd-grid" style="margin-top:0;padding-top:20px;">
+      <!-- Info grid -->
+      <div class="qd-grid">
 
-    <!-- General Info -->
-    <div class="qd-panel">
-      <div class="qd-panel-head">General Info</div>
-      <div class="qd-panel-body">
-        <div class="qd-row">
-          <span class="qd-label">Purchaser</span>
-          <div id="qd-purchaser-block">
-            <div class="qd-val">FlexiQuote Systems<br>15 Ellen St<br>Logan Central, QLD</div>
-            <div class="qd-row" style="margin-top:16px;">
-              <span class="qd-label">Phone</span>
-              <div class="qd-val">07 38082170</div>
+        <!-- General Info -->
+        <div class="qd-panel">
+          <div class="qd-panel-head">General Info</div>
+          <div class="qd-row">
+            <span class="qd-label">Purchaser</span>
+            <div id="qd-purchaser-block">
+              <div class="qd-val">FlexiQuote Systems<br>15 Ellen St<br>Logan Central, QLD</div>
+              <div style="margin-top:12px;">
+                <span class="qd-label">Phone</span>
+                <div class="qd-val">07 38082170</div>
+              </div>
             </div>
           </div>
+          <div class="qd-row">
+            <span class="qd-label">Estimator</span>
+            <span class="qd-val">Karen Carpenter</span>
+          </div>
+          <div class="qd-row">
+            <span class="qd-label">Reference</span>
+            <span class="qd-val">40413</span>
+          </div>
         </div>
-        <div class="qd-row">
-          <span class="qd-label">Estimator</span>
-          <span class="qd-val">Karen Carpenter</span>
-        </div>
-        <div class="qd-row">
-          <span class="qd-label">Reference</span>
-          <span class="qd-val">40413</span>
-        </div>
-      </div>
-    </div>
 
-    <!-- Vehicle Info -->
-    <div class="qd-panel">
-      <div class="qd-panel-head">Vehicle Info</div>
-      <div class="qd-panel-body">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 12px;">
-          <div class="qd-row"><span class="qd-label">Make</span><span class="qd-val">Toyota</span></div>
-          <div class="qd-row"><span class="qd-label">Model</span><span class="qd-val">Corolla</span></div>
-          <div class="qd-row"><span class="qd-label">Model No.</span><span class="qd-val">--</span></div>
-          <div class="qd-row"><span class="qd-label">Series</span><span class="qd-val">--</span></div>
-          <div class="qd-row"><span class="qd-label">Trans</span><span class="qd-val">--</span></div>
-          <div class="qd-row"><span class="qd-label">Colour</span><span class="qd-val">Mat Red</span></div>
-          <div class="qd-row"><span class="qd-label">Body</span><span class="qd-val">4 DOOR Sedan</span></div>
-          <div class="qd-row"><span class="qd-label">Mth/Yr</span><span class="qd-val">1/2025</span></div>
-          <div class="qd-row"><span class="qd-label">Veh Reg</span><span class="qd-val">55FHR</span></div>
-          <div class="qd-row"><span class="qd-label">Claim Nr</span><span class="qd-val">NRP05456200</span></div>
-          <div class="qd-row" style="grid-column:1/-1;"><span class="qd-label">VIN</span><span class="qd-val">MR053REH205309076</span></div>
+        <!-- Vehicle Info -->
+        <div class="qd-panel">
+          <div class="qd-panel-head">Vehicle Info</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 12px;">
+            <div class="qd-row"><span class="qd-label">Make</span><span class="qd-val">Toyota</span></div>
+            <div class="qd-row"><span class="qd-label">Model</span><span class="qd-val">Corolla</span></div>
+            <div class="qd-row"><span class="qd-label">Model No.</span><span class="qd-val">--</span></div>
+            <div class="qd-row"><span class="qd-label">Series</span><span class="qd-val">--</span></div>
+            <div class="qd-row"><span class="qd-label">Trans</span><span class="qd-val">--</span></div>
+            <div class="qd-row"><span class="qd-label">Colour</span><span class="qd-val">Mat Red</span></div>
+            <div class="qd-row"><span class="qd-label">Body</span><span class="qd-val">4 DOOR Sedan</span></div>
+            <div class="qd-row"><span class="qd-label">Mth/Yr</span><span class="qd-val">1/2025</span></div>
+            <div class="qd-row"><span class="qd-label">Veh Reg</span><span class="qd-val">55FHR</span></div>
+            <div class="qd-row"><span class="qd-label">Claim Nr</span><span class="qd-val">NRP05456200</span></div>
+            <div class="qd-row" style="grid-column:1/-1;"><span class="qd-label">VIN</span><span class="qd-val">MR053REH205309076</span></div>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Required Info -->
-    <div class="qd-panel">
-      <div class="qd-panel-body">
-        <div class="qd-optional-head" style="margin-top:0;">Optional Info</div>
-        <div style="padding-top:12px;">
-          <div class="qd-row"><span class="qd-label">Internal Status</span><select class="qd-select"><option>API Assigned</option><option>In Progress</option><option>Complete</option></select></div>
-          <div class="qd-row"><span class="qd-label">Sales Rep</span><select class="qd-select"><option>Not Selected</option><option>Jordan Mills</option></select></div>
+        <!-- Optional Info -->
+        <div class="qd-panel">
+          <div class="qd-panel-head">Optional Info</div>
+          <div class="qd-row">
+            <span class="qd-label">Internal Status</span>
+            <select class="qd-select"><option>API Assigned</option><option>In Progress</option><option>Complete</option></select>
+          </div>
+          <div class="qd-row">
+            <span class="qd-label">Sales Rep</span>
+            <select class="qd-select"><option>Not Selected</option><option>Jordan Mills</option></select>
+          </div>
           <div class="qd-row">
             <div style="display:flex;gap:16px;">
-              <div style="flex:1;display:flex;flex-direction:column;gap:6px;"><span class="qd-label">Est. Freight</span><input class="qd-input" type="text" style="width:100%;"></div>
-              <div style="flex:1;display:flex;flex-direction:column;gap:6px;"><span class="qd-label">Settlement %</span><input class="qd-input" type="text" value="0.00" style="width:100%;"></div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:6px;">
+                <span class="qd-label">Est. Freight</span>
+                <input class="qd-input" type="text">
+              </div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:6px;">
+                <span class="qd-label">Settlement %</span>
+                <input class="qd-input" type="text" value="0.00">
+              </div>
             </div>
           </div>
           <div style="font-size:12px;color:#0000cc;text-decoration:underline;cursor:pointer;margin-top:-4px;">What is this?</div>
-          <div style="display:flex;align-items:center;gap:8px;margin-top:10px;"><input type="checkbox"><span class="qd-label">Take Ownership</span></div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:10px;">
+            <input type="checkbox">
+            <span class="qd-label">Take Ownership</span>
+          </div>
         </div>
+
+      </div><!-- end qd-grid -->
+    </div>
+  </div><!-- end quote info card -->
+
+  <!-- Parts card -->
+  <div style="margin-top:20px;background:#fff;border-radius:10px;border:0.5px solid #e2e5ea;overflow:hidden;">
+    <div style="font-size:1.1rem;font-weight:600;color:#1a1a2e;background:#f8fafc;padding:10px 24px;border-bottom:0.5px solid #e2e5ea;">Parts</div>
+    <div style="padding:20px 24px;">
+
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+        <span style="font-size:12px;font-weight:600;color:#718096;white-space:nowrap;">Set All Est. Delivery:</span>
+        <select class="qd-select" style="font-size:12px;" onchange="document.querySelectorAll('.parts-delivery-sel').forEach(s=>s.value=this.value)">
+          <option value="">Select</option>
+          <option>Next Day</option>
+          <option>2-3 Days</option>
+          <option>3-5 Days</option>
+          <option>1 Week+</option>
+        </select>
       </div>
-    </div>
 
-  </div><!-- end qd-grid -->
-  </div><!-- end content padding -->
-  </div><!-- end quote info box -->
-
-  <!-- Parts section -->
-  <div style="margin-top:32px;background:#fff;border-radius:10px;border:0.5px solid #e2e5ea;overflow:hidden;">
-    <div style="font-size:1.25rem;font-weight:600;color:#1a1a2e;background:#f8fafc;padding:10px 24px;border-bottom:0.5px solid #e2e5ea;">Parts</div>
-    <div style="padding:24px;">
-    <!-- Parts filter bar -->
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-      <span style="font-size:12px;font-weight:600;color:#718096;white-space:nowrap;">Set All Est. Delivery:</span>
-      <select id="parts-delivery-filter" class="qd-select" style="font-size:12px;" onchange="
-        const val = this.value;
-        document.querySelectorAll('.parts-delivery-sel').forEach(s => s.value = val);
-      ">
-        <option value="">Select</option>
-        <option>Next Day</option>
-        <option>2-3 Days</option>
-        <option>3-5 Days</option>
-        <option>1 Week+</option>
-      </select>
-    </div>
-    <div style="margin-top:0;">
-      <div class="parts-table" style="border:0.5px solid #e2e5ea;border-radius:8px;overflow:hidden;">
-        <table style="width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed;">
+      <div class="parts-table">
+        <table>
           <colgroup>
             <col style="width:3%">
             <col style="width:19%">
@@ -456,137 +433,146 @@ input[type="checkbox"] { width:16px; height:16px; cursor:pointer; accent-color:#
           </colgroup>
           <thead>
             <tr style="background:#f8fafc;">
-              <th style="padding:10px 12px;text-align:center;border-bottom:0.5px solid #e2e5ea;"><input type="checkbox" id="parts-select-all" onchange="document.querySelectorAll('.parts-row-cb').forEach(cb=>cb.checked=this.checked)"></th>
-              <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;border-bottom:0.5px solid #e2e5ea;">Description</th>
-              <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;border-bottom:0.5px solid #e2e5ea;">Part Number</th>
-              <th style="padding:10px 4px;text-align:center;font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;border-bottom:0.5px solid #e2e5ea;">QTY</th>
-              <th style="padding:10px 14px;text-align:right;font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;border-bottom:0.5px solid #e2e5ea;">Total List ex GST</th>
-              <th style="padding:10px 14px;text-align:right;font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;border-bottom:0.5px solid #e2e5ea;">Total Buy ex GST</th>
-              <th style="padding:10px 14px;text-align:center;font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;border-bottom:0.5px solid #e2e5ea;">
+              <th style="text-align:center;">
+                <input type="checkbox" id="parts-select-all" onchange="document.querySelectorAll('.parts-row-cb').forEach(cb=>cb.checked=this.checked)">
+              </th>
+              <th>Description</th>
+              <th>Part Number</th>
+              <th style="text-align:center;">QTY</th>
+              <th style="text-align:right;">Total List ex GST</th>
+              <th style="text-align:right;">Total Buy ex GST</th>
+              <th style="text-align:center;">
                 <div>Type Request</div>
                 <div style="display:flex;justify-content:center;gap:14px;margin-top:4px;">
-                  <span style="font-size:10px;font-weight:600;color:#718096;text-transform:uppercase;display:inline-block;width:28px;text-align:center;">OEM</span>
-                  <span style="font-size:10px;font-weight:600;color:#718096;text-transform:uppercase;display:inline-block;width:28px;text-align:center;">USE</span>
-                  <span style="font-size:10px;font-weight:600;color:#718096;text-transform:uppercase;display:inline-block;width:28px;text-align:center;">AFT</span>
-                  <span style="font-size:10px;font-weight:600;color:#718096;text-transform:uppercase;display:inline-block;width:28px;text-align:center;">REC</span>
+                  <span style="width:28px;text-align:center;">OEM</span>
+                  <span style="width:28px;text-align:center;">USE</span>
+                  <span style="width:28px;text-align:center;">AFT</span>
+                  <span style="width:28px;text-align:center;">REC</span>
                 </div>
               </th>
-              <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;border-bottom:0.5px solid #e2e5ea;">Est. Delivery</th>
-              <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;border-bottom:0.5px solid #e2e5ea;">Notes</th>
-              <th style="padding:10px 14px;text-align:center;font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;border-bottom:0.5px solid #e2e5ea;">Alt</th>
+              <th>Est. Delivery</th>
+              <th>Notes</th>
+              <th style="text-align:center;">Alt</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td style="padding:8px 12px;border-bottom:0.5px solid #f0f2f5;text-align:center;"><input type="checkbox" class="parts-row-cb"></td>
-              <td style="padding:8px 14px;border-bottom:0.5px solid #f0f2f5;color:#2d3748;">Front Brake Pad Set</td>
-              <td style="padding:8px 14px;border-bottom:0.5px solid #f0f2f5;"><input type="text" value="DB1234"></td>
-              <td style="padding:8px 4px;border-bottom:0.5px solid #f0f2f5;text-align:center;"><input type="number" value="2" min="0" style="text-align:center;width:40px;margin:0 auto;display:block;"></td>
-              <td style="padding:8px 14px;border-bottom:0.5px solid #f0f2f5;"><input type="text" value="$120.00" style="text-align:right;"></td>
-              <td style="padding:8px 14px;border-bottom:0.5px solid #f0f2f5;"><input type="text" value="$84.00" style="text-align:right;"></td>
-              <td style="padding:10px 14px;border-bottom:0.5px solid #f0f2f5;text-align:center;">
-                <div style="display:flex;justify-content:center;gap:14px;">
-                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb" checked></span>
-                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb"></span>
-                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb"></span>
-                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb"></span>
+              <td class="center"><input type="checkbox" class="parts-row-cb"></td>
+              <td>Front Brake Pad Set</td>
+              <td><input type="text" value="DB1234"></td>
+              <td class="center"><input type="number" value="2" min="0"></td>
+              <td><input type="text" value="$120.00" style="text-align:right;"></td>
+              <td><input type="text" value="$84.00" style="text-align:right;"></td>
+              <td class="center">
+                <div class="type-req-group">
+                  <span><input type="checkbox" checked></span>
+                  <span><input type="checkbox"></span>
+                  <span><input type="checkbox"></span>
+                  <span><input type="checkbox"></span>
                 </div>
               </td>
-              <td style="padding:8px 8px;border-bottom:0.5px solid #f0f2f5;"><select class="parts-delivery-sel" style="width:100%;border:0.5px solid #e2e5ea;border-radius:4px;padding:4px 28px 4px 6px;font-size:12px;color:#2d3748;outline:none;font-family:'Open Sans',sans-serif;"><option value="">Select</option><option>Next Day</option><option>2-3 Days</option><option>3-5 Days</option><option>1 Week+</option></select></td>
-              <td style="padding:8px 14px;border-bottom:0.5px solid #f0f2f5;"><button class="add-notes-btn">+ Add Notes</button></td>
-              <td style="padding:12px 14px;border-bottom:0.5px solid #f0f2f5;text-align:center;"><input type="checkbox"></td>
+              <td><select class="parts-delivery-sel"><option value="">Select</option><option>Next Day</option><option>2-3 Days</option><option>3-5 Days</option><option>1 Week+</option></select></td>
+              <td><button class="add-notes-btn">+ Add Notes</button></td>
+              <td class="center"><input type="checkbox"></td>
             </tr>
             <tr>
-              <td style="padding:8px 12px;border-bottom:0.5px solid #f0f2f5;text-align:center;"><input type="checkbox" class="parts-row-cb"></td>
-              <td style="padding:8px 14px;border-bottom:0.5px solid #f0f2f5;color:#2d3748;">Brake Rotor Front</td>
-              <td style="padding:8px 14px;border-bottom:0.5px solid #f0f2f5;"><input type="text" value="BR5567"></td>
-              <td style="padding:8px 4px;border-bottom:0.5px solid #f0f2f5;text-align:center;"><input type="number" value="2" min="0" style="text-align:center;width:40px;margin:0 auto;display:block;"></td>
-              <td style="padding:8px 14px;border-bottom:0.5px solid #f0f2f5;"><input type="text" value="$210.00" style="text-align:right;"></td>
-              <td style="padding:8px 14px;border-bottom:0.5px solid #f0f2f5;"><input type="text" value="$147.00" style="text-align:right;"></td>
-              <td style="padding:10px 14px;border-bottom:0.5px solid #f0f2f5;text-align:center;">
-                <div style="display:flex;justify-content:center;gap:14px;">
-                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb"></span>
-                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb"></span>
-                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb" checked></span>
-                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb"></span>
+              <td class="center"><input type="checkbox" class="parts-row-cb"></td>
+              <td>Brake Rotor Front</td>
+              <td><input type="text" value="BR5567"></td>
+              <td class="center"><input type="number" value="2" min="0"></td>
+              <td><input type="text" value="$210.00" style="text-align:right;"></td>
+              <td><input type="text" value="$147.00" style="text-align:right;"></td>
+              <td class="center">
+                <div class="type-req-group">
+                  <span><input type="checkbox"></span>
+                  <span><input type="checkbox"></span>
+                  <span><input type="checkbox" checked></span>
+                  <span><input type="checkbox"></span>
                 </div>
               </td>
-              <td style="padding:8px 8px;border-bottom:0.5px solid #f0f2f5;"><select class="parts-delivery-sel" style="width:100%;border:0.5px solid #e2e5ea;border-radius:4px;padding:4px 28px 4px 6px;font-size:12px;color:#2d3748;outline:none;font-family:'Open Sans',sans-serif;"><option value="">Select</option><option>Next Day</option><option>2-3 Days</option><option>3-5 Days</option><option>1 Week+</option></select></td>
-              <td style="padding:8px 14px;border-bottom:0.5px solid #f0f2f5;"><button class="add-notes-btn">+ Add Notes</button></td>
-              <td style="padding:12px 14px;border-bottom:0.5px solid #f0f2f5;text-align:center;"><input type="checkbox"></td>
+              <td><select class="parts-delivery-sel"><option value="">Select</option><option>Next Day</option><option>2-3 Days</option><option>3-5 Days</option><option>1 Week+</option></select></td>
+              <td><button class="add-notes-btn">+ Add Notes</button></td>
+              <td class="center"><input type="checkbox"></td>
             </tr>
             <tr>
-              <td style="padding:8px 12px;text-align:center;"><input type="checkbox" class="parts-row-cb"></td>
-              <td style="padding:8px 14px;color:#2d3748;">Caliper Bolt Kit</td>
-              <td style="padding:8px 14px;"><input type="text" value="CK0091"></td>
-              <td style="padding:8px 4px;text-align:center;"><input type="number" value="1" min="0" style="text-align:center;width:40px;margin:0 auto;display:block;"></td>
-              <td style="padding:8px 14px;"><input type="text" value="$28.00" style="text-align:right;"></td>
-              <td style="padding:8px 14px;"><input type="text" value="$19.60" style="text-align:right;"></td>
-              <td style="padding:10px 14px;text-align:center;">
-                <div style="display:flex;justify-content:center;gap:14px;">
-                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb" checked></span>
-                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb"></span>
-                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb"></span>
-                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb"></span>
+              <td class="center"><input type="checkbox" class="parts-row-cb"></td>
+              <td>Caliper Bolt Kit</td>
+              <td><input type="text" value="CK0091"></td>
+              <td class="center"><input type="number" value="1" min="0"></td>
+              <td><input type="text" value="$28.00" style="text-align:right;"></td>
+              <td><input type="text" value="$19.60" style="text-align:right;"></td>
+              <td class="center">
+                <div class="type-req-group">
+                  <span><input type="checkbox" checked></span>
+                  <span><input type="checkbox"></span>
+                  <span><input type="checkbox"></span>
+                  <span><input type="checkbox"></span>
                 </div>
               </td>
-              <td style="padding:8px 8px;"><select class="parts-delivery-sel" style="width:100%;border:0.5px solid #e2e5ea;border-radius:4px;padding:4px 28px 4px 6px;font-size:12px;color:#2d3748;outline:none;font-family:'Open Sans',sans-serif;"><option value="">Select</option><option>Next Day</option><option>2-3 Days</option><option>3-5 Days</option><option>1 Week+</option></select></td>
-              <td style="padding:8px 14px;"><button class="add-notes-btn">+ Add Notes</button></td>
-              <td style="padding:12px 14px;text-align:center;"><input type="checkbox"></td>
+              <td><select class="parts-delivery-sel"><option value="">Select</option><option>Next Day</option><option>2-3 Days</option><option>3-5 Days</option><option>1 Week+</option></select></td>
+              <td><button class="add-notes-btn">+ Add Notes</button></td>
+              <td class="center"><input type="checkbox"></td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
+  </div><!-- end parts card -->
 
-    </div>
-    </div><!-- end parts padding -->
-  </div><!-- end parts box -->
 </div><!-- end page-quote-detail -->
 
-<div class="page" id="page-orders" style="display:none">
+
+<!-- ════════════ OTHER PAGES ════════════ -->
+
+<div class="page" id="page-orders" style="display:none;">
   <div class="page-header">
     <div><div class="page-title">My Orders</div><div class="page-sub">Track all purchase orders and shipments</div></div>
     <button class="btn btn-primary">+ New Order</button>
   </div>
   <div class="stats-row">
-    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#0db14b;border-radius:0 2px 2px 0;"></div><div class="stat-label">Open Orders</div><div class="stat-value">37</div></div>
-    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#3B6D11;border-radius:0 2px 2px 0;"></div><div class="stat-label">Shipped</div><div class="stat-value">12</div></div>
-    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#854F0B;border-radius:0 2px 2px 0;"></div><div class="stat-label">Awaiting</div><div class="stat-value">8</div></div>
-    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#534AB7;border-radius:0 2px 2px 0;"></div><div class="stat-label">Month Spend</div><div class="stat-value">$92k</div></div>
+    <div class="stat-card"><div class="stat-bar" style="background:#0db14b;"></div><div class="stat-label">Open Orders</div><div class="stat-value">37</div></div>
+    <div class="stat-card"><div class="stat-bar" style="background:#3B6D11;"></div><div class="stat-label">Shipped</div><div class="stat-value">12</div></div>
+    <div class="stat-card"><div class="stat-bar" style="background:#854F0B;"></div><div class="stat-label">Awaiting</div><div class="stat-value">8</div></div>
+    <div class="stat-card"><div class="stat-bar" style="background:#534AB7;"></div><div class="stat-label">Month Spend</div><div class="stat-value">$92k</div></div>
   </div>
-  <div class="card"><div class="card-header"><div class="card-title">Order History</div></div>
-    <table><thead><tr><th>Order #</th><th>Customer</th><th>Date</th><th>Total</th><th>Status</th><th></th></tr></thead>
-    <tbody>
-      <tr><td style="font-weight:600;color:#0db14b;">#PO-9910</td><td>Acme Corp</td><td>Mar 28, 2026</td><td>$12,400</td><td><span class="status-pill s-approved">Shipped</span></td><td><a class="action-link">Track →</a></td></tr>
-      <tr><td style="font-weight:600;color:#0db14b;">#PO-9908</td><td>Blue Giant LLC</td><td>Mar 25, 2026</td><td>$6,200</td><td><span class="status-pill s-pending">Processing</span></td><td><a class="action-link">Track →</a></td></tr>
-      <tr><td style="font-weight:600;color:#0db14b;">#PO-9905</td><td>Nexaflow Inc</td><td>Mar 20, 2026</td><td>$18,750</td><td><span class="status-pill s-review">In Transit</span></td><td><a class="action-link">Track →</a></td></tr>
-    </tbody></table>
+  <div class="card">
+    <div class="card-header"><div class="card-title">Order History</div></div>
+    <table>
+      <thead><tr><th>Order #</th><th>Customer</th><th>Date</th><th>Total</th><th>Status</th><th></th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;color:#0db14b;">#PO-9910</td><td>Acme Corp</td><td>Mar 28, 2026</td><td>$12,400</td><td><span class="status-pill s-approved">Shipped</span></td><td><a class="action-link">Track →</a></td></tr>
+        <tr><td style="font-weight:600;color:#0db14b;">#PO-9908</td><td>Blue Giant LLC</td><td>Mar 25, 2026</td><td>$6,200</td><td><span class="status-pill s-pending">Processing</span></td><td><a class="action-link">Track →</a></td></tr>
+        <tr><td style="font-weight:600;color:#0db14b;">#PO-9905</td><td>Nexaflow Inc</td><td>Mar 20, 2026</td><td>$18,750</td><td><span class="status-pill s-review">In Transit</span></td><td><a class="action-link">Track →</a></td></tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
-<div class="page" id="page-credit" style="display:none">
+<div class="page" id="page-credit" style="display:none;">
   <div class="page-header">
     <div><div class="page-title">Credit Management</div><div class="page-sub">Monitor credit lines, balances, and applications</div></div>
     <button class="btn btn-primary">+ New Application</button>
   </div>
   <div class="stats-row">
-    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#0db14b;border-radius:0 2px 2px 0;"></div><div class="stat-label">Total Credit Line</div><div class="stat-value">$500k</div></div>
-    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#e24b4a;border-radius:0 2px 2px 0;"></div><div class="stat-label">Used Credit</div><div class="stat-value">$213k</div></div>
-    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#3B6D11;border-radius:0 2px 2px 0;"></div><div class="stat-label">Available</div><div class="stat-value">$287k</div></div>
-    <div class="stat-card"><div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:48px;background:#854F0B;border-radius:0 2px 2px 0;"></div><div class="stat-label">Overdue Balance</div><div class="stat-value">$4.2k</div></div>
+    <div class="stat-card"><div class="stat-bar" style="background:#0db14b;"></div><div class="stat-label">Total Credit Line</div><div class="stat-value">$500k</div></div>
+    <div class="stat-card"><div class="stat-bar" style="background:#e24b4a;"></div><div class="stat-label">Used Credit</div><div class="stat-value">$213k</div></div>
+    <div class="stat-card"><div class="stat-bar" style="background:#3B6D11;"></div><div class="stat-label">Available</div><div class="stat-value">$287k</div></div>
+    <div class="stat-card"><div class="stat-bar" style="background:#854F0B;"></div><div class="stat-label">Overdue Balance</div><div class="stat-value">$4.2k</div></div>
   </div>
-  <div class="card"><div class="card-header"><div class="card-title">Credit Applications</div></div>
-    <table><thead><tr><th>App #</th><th>Company</th><th>Amount</th><th>Submitted</th><th>Status</th><th></th></tr></thead>
-    <tbody>
-      <tr><td style="font-weight:600;">#CR-221</td><td>Acme Corp</td><td>$100,000</td><td>Mar 22, 2026</td><td><span class="status-pill s-review">Under Review</span></td><td><a class="action-link" title="Print"><span class="material-symbols-outlined" style="font-size:18px;">print</span></a></td></tr>
-      <tr><td style="font-weight:600;">#CR-220</td><td>Vortex Ltd</td><td>$50,000</td><td>Mar 15, 2026</td><td><span class="status-pill s-approved">New</span></td><td><a class="action-link" title="Print"><span class="material-symbols-outlined" style="font-size:18px;">print</span></a></td></tr>
-      <tr><td style="font-weight:600;">#CR-219</td><td>SkyBridge</td><td>$75,000</td><td>Mar 8, 2026</td><td><span class="status-pill s-approved">New</span></td><td><a class="action-link" title="Print"><span class="material-symbols-outlined" style="font-size:18px;">print</span></a></td></tr>
-    </tbody></table>
+  <div class="card">
+    <div class="card-header"><div class="card-title">Credit Applications</div></div>
+    <table>
+      <thead><tr><th>App #</th><th>Company</th><th>Amount</th><th>Submitted</th><th>Status</th><th></th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;">#CR-221</td><td>Acme Corp</td><td>$100,000</td><td>Mar 22, 2026</td><td><span class="status-pill s-review">Under Review</span></td><td><a class="action-link"><span class="material-symbols-outlined" style="font-size:18px;">print</span></a></td></tr>
+        <tr><td style="font-weight:600;">#CR-220</td><td>Vortex Ltd</td><td>$50,000</td><td>Mar 15, 2026</td><td><span class="status-pill s-approved">New</span></td><td><a class="action-link"><span class="material-symbols-outlined" style="font-size:18px;">print</span></a></td></tr>
+        <tr><td style="font-weight:600;">#CR-219</td><td>SkyBridge</td><td>$75,000</td><td>Mar 8, 2026</td><td><span class="status-pill s-approved">New</span></td><td><a class="action-link"><span class="material-symbols-outlined" style="font-size:18px;">print</span></a></td></tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
-<div class="page" id="page-reports" style="display:none">
+<div class="page" id="page-reports" style="display:none;">
   <div class="page-header">
     <div><div class="page-title">Reports</div><div class="page-sub">Analytics, exports, and scheduled reports</div></div>
     <button class="btn btn-primary">+ Schedule Report</button>
@@ -601,7 +587,7 @@ input[type="checkbox"] { width:16px; height:16px; cursor:pointer; accent-color:#
   </div>
 </div>
 
-<div class="page" id="page-tools" style="display:none">
+<div class="page" id="page-tools" style="display:none;">
   <div class="page-header">
     <div><div class="page-title">Tools</div><div class="page-sub">Calculators, configurators, and integrations</div></div>
   </div>
@@ -612,6 +598,7 @@ input[type="checkbox"] { width:16px; height:16px; cursor:pointer; accent-color:#
     <div class="card" style="padding:20px;cursor:pointer;display:flex;align-items:flex-start;gap:14px;"><div style="width:40px;height:40px;border-radius:8px;background:#EEEDFE;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🔌</div><div><div style="font-weight:600;margin-bottom:4px;">API Access</div><div style="font-size:12px;color:#718096;">Manage keys, webhooks, and integrations</div></div></div>
   </div>
 </div>
+
 
 <script>
 const iconCheck = `<span class="material-symbols-outlined" style="font-size:20px;color:#0db14b;font-variation-settings:'FILL' 1;margin-right:10px;">check_circle</span>`;
@@ -651,87 +638,6 @@ function renderIcons(arr) {
   return arr.map(v => v ? iconCheck : iconWarn).join('');
 }
 
-function filterSearch(val) {
-  const filtered = currentTabData.filter(r => r.purchaser.toLowerCase().includes(val.toLowerCase()) || r.quote.toLowerCase().includes(val.toLowerCase()));
-  document.getElementById('quotes-tbody').innerHTML = renderRows(filtered);
-}
-
-function switchTab(btn, tab) {
-  document.querySelectorAll('.filter-row .filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  currentTabData = tabData[tab];
-  document.getElementById('quotes-tbody').innerHTML = renderRows(currentTabData);
-}
-
-
-// Populate submitted list
-document.getElementById('submitted-tbody').innerHTML = renderSubmittedRows(tabData.submitted);
-
-// Pin sticky block exactly below topbar + navbar
-(function() {
-  const offset = document.querySelector('.topbar').getBoundingClientRect().height
-               + document.querySelector('nav.navbar').getBoundingClientRect().height;
-  document.getElementById('quotes-sticky-block').style.top = offset + 'px';
-
-  // Shadow on active thead when scrolled
-  const thead = document.getElementById('quotes-thead');
-  const subThead = document.getElementById('submitted-thead');
-  window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY > 0;
-    thead.classList.toggle('scrolled', scrolled);
-    subThead.classList.toggle('scrolled', scrolled);
-  }, { passive: true });
-})();
-
-function showPage(name) {
-  ['quotes','quote-detail','orders','credit','reports','tools'].forEach(p => {
-    document.getElementById('page-'+p).style.display = p===name?'block':'none';
-  });
-  document.querySelectorAll('.nav-item').forEach((el,i) => {
-    const pages = ['quotes','orders','credit','reports','tools'];
-    el.classList.toggle('active', pages[i]===name);
-  });
-}
-
-function openQuoteDetail(quoteNum, purchaser) {
-  document.getElementById('qd-quote-nr').value = quoteNum.replace('#','');
-  document.getElementById('qd-quote-nr-display').textContent = quoteNum;
-  if (purchaser) document.getElementById('qd-purchaser-block').innerHTML = '<div class="qd-val">' + purchaser + '<br>15 Ellen St<br>Logan Central, QLD</div><div style="margin-top:8px;"><span class="qd-label">Phone</span><div class="qd-val">07 38082170</div></div>';
-  showPage('quote-detail');
-  window.scrollTo(0,0);
-}
-
-function switchMainTab(btn, view) {
-  document.querySelectorAll('.view-tab').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  const isIncoming = view === 'incoming';
-  document.getElementById('incoming-header').style.display    = isIncoming ? '' : 'none';
-  document.getElementById('incoming-rows-wrap').style.display = isIncoming ? '' : 'none';
-  document.getElementById('submitted-header').style.display    = isIncoming ? 'none' : '';
-  document.getElementById('submitted-rows-wrap').style.display = isIncoming ? 'none' : '';
-}
-
-function filterSubmitted(val) {
-  const rows = tabData.submitted.filter(r =>
-    r.purchaser.toLowerCase().includes(val.toLowerCase()) ||
-    r.quote.toLowerCase().includes(val.toLowerCase())
-  );
-  document.getElementById('submitted-tbody').innerHTML = renderSubmittedRows(rows);
-}
-
-function renderSubmittedRows(data) {
-  return data.map(r => `
-    <tr>
-      <td style="font-weight:700;color:#0db14b;text-decoration:underline;cursor:pointer;" onclick="openQuoteDetail('${r.quote}','${r.purchaser}')">${r.quote}</td>
-      <td>${r.purchaser}</td>
-      <td style="font-weight:600;color:#2d3748;">${r.pquote}</td>
-      <td style="text-align:center;color:#2d3748;">${r.items}</td>
-      <td style="text-align:center;color:#2d3748;padding-right:4px;">${r.you}</td>
-      <td style="text-align:center;color:#2d3748;padding-left:4px;">${r.comp}</td>
-      <td style="text-align:center;"><a class="action-link" title="View"><span class="material-symbols-outlined" style="font-size:18px;">open_in_new</span></a></td>
-    </tr>`).join('');
-}
-
 function renderRows(data) {
   return data.map(r => `
     <tr>
@@ -744,40 +650,107 @@ function renderRows(data) {
     </tr>`).join('');
 }
 
-currentTabData = tabData['new'];
-document.getElementById('quotes-tbody').innerHTML = renderRows(currentTabData);
+function renderSubmittedRows(data) {
+  return data.map(r => `
+    <tr>
+      <td style="font-weight:700;color:#0db14b;text-decoration:underline;cursor:pointer;" onclick="openQuoteDetail('${r.quote}','${r.purchaser}')">${r.quote}</td>
+      <td>${r.purchaser}</td>
+      <td style="font-weight:600;color:#2d3748;">${r.pquote}</td>
+      <td style="text-align:center;">${r.items}</td>
+      <td style="text-align:center;">${r.you}</td>
+      <td style="text-align:center;">${r.comp}</td>
+      <td style="text-align:center;"><a class="action-link"><span class="material-symbols-outlined" style="font-size:18px;">open_in_new</span></a></td>
+    </tr>`).join('');
+}
 
-// Set pill counters from actual data
-document.getElementById('count-all').textContent = tabData.all.length;
-document.getElementById('count-new').textContent = tabData.new.length;
-document.getElementById('count-open').textContent = tabData.open.length;
-document.getElementById('count-incoming-tab').textContent = tabData.new.length + tabData.open.length;
+function filterSearch(val) {
+  const v = val.toLowerCase();
+  document.getElementById('quotes-tbody').innerHTML = renderRows(
+    currentTabData.filter(r => r.purchaser.toLowerCase().includes(v) || r.quote.toLowerCase().includes(v))
+  );
+}
+
+function filterSubmitted(val) {
+  const v = val.toLowerCase();
+  document.getElementById('submitted-tbody').innerHTML = renderSubmittedRows(
+    tabData.submitted.filter(r => r.purchaser.toLowerCase().includes(v) || r.quote.toLowerCase().includes(v))
+  );
+}
+
+function switchTab(btn, tab) {
+  document.querySelectorAll('.card-header .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentTabData = tabData[tab];
+  document.getElementById('quotes-tbody').innerHTML = renderRows(currentTabData);
+}
+
+function switchMainTab(btn, view) {
+  document.querySelectorAll('.view-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const incoming = view === 'incoming';
+  document.getElementById('incoming-header').style.display     = incoming ? '' : 'none';
+  document.getElementById('incoming-rows-wrap').style.display  = incoming ? '' : 'none';
+  document.getElementById('submitted-header').style.display    = incoming ? 'none' : '';
+  document.getElementById('submitted-rows-wrap').style.display = incoming ? 'none' : '';
+}
+
+function showPage(name) {
+  ['quotes','quote-detail','orders','credit','reports','tools'].forEach(p => {
+    document.getElementById('page-' + p).style.display = p === name ? 'block' : 'none';
+  });
+  document.querySelectorAll('.nav-item').forEach((el, i) => {
+    el.classList.toggle('active', ['quotes','orders','credit','reports','tools'][i] === name);
+  });
+  sessionStorage.setItem('_page', name);
+}
+
+function openQuoteDetail(quoteNum, purchaser) {
+  document.getElementById('qd-quote-nr-display').value = quoteNum;
+  if (purchaser) {
+    document.getElementById('qd-purchaser-block').innerHTML =
+      `<div class="qd-val">${purchaser}<br>15 Ellen St<br>Logan Central, QLD</div>
+       <div style="margin-top:12px;"><span class="qd-label">Phone</span><div class="qd-val">07 38082170</div></div>`;
+  }
+  showPage('quote-detail');
+  window.scrollTo(0, 0);
+}
+
+// ── Init ──
+currentTabData = tabData.new;
+document.getElementById('quotes-tbody').innerHTML    = renderRows(currentTabData);
+document.getElementById('submitted-tbody').innerHTML = renderSubmittedRows(tabData.submitted);
+
+document.getElementById('count-all').textContent           = tabData.all.length;
+document.getElementById('count-new').textContent           = tabData.new.length;
+document.getElementById('count-open').textContent          = tabData.open.length;
+document.getElementById('count-incoming-tab').textContent  = tabData.new.length + tabData.open.length;
 document.getElementById('count-submitted-tab').textContent = tabData.submitted.length;
 
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', function() {
-    this.closest('.filter-row').querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-    this.classList.add('active');
-  });
-});
+// Pin sticky block below topbar + navbar
+(function() {
+  const offset = document.querySelector('.topbar').getBoundingClientRect().height
+               + document.querySelector('nav.navbar').getBoundingClientRect().height;
+  document.getElementById('quotes-sticky-block').style.top = offset + 'px';
 
-// ── Persist current page across auto-reloads ──
-const _origShowPage = showPage;
-window.showPage = function(name) {
-  sessionStorage.setItem('_page', name);
-  _origShowPage(name);
-};
+  const thead    = document.getElementById('quotes-thead');
+  const subThead = document.getElementById('submitted-thead');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY > 0;
+    thead.classList.toggle('scrolled', scrolled);
+    subThead.classList.toggle('scrolled', scrolled);
+  }, { passive: true });
+})();
 
-// Restore page on load (sessionStorage survives reload)
+// Restore page on reload
 const _savedPage = sessionStorage.getItem('_page');
 if (_savedPage) showPage(_savedPage);
 
-// ── Auto-refresh when file changes ──
+// Auto-refresh on file change
 (function() {
   let _lastLen = null;
   setInterval(async () => {
     try {
-      const r = await fetch(location.href + '?_=' + Date.now(), { cache: 'no-store' });
+      const r    = await fetch(location.href + '?_=' + Date.now(), { cache: 'no-store' });
       const text = await r.text();
       if (_lastLen !== null && text.length !== _lastLen) location.reload();
       _lastLen = text.length;
