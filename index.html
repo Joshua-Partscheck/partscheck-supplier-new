@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Business Portal</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0..1,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800;900&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0..1,0" />
 <style>
   .material-symbols-outlined { font-size: 18px; vertical-align: middle; }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -45,7 +45,7 @@
   /* PAGE CONTENT */
   .page { padding: 28px 24px; }
   .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-  .page-title { font-size: 20px; font-weight: 600; color: #1a1a2e; }
+  .page-title { font-size: 1.5rem; font-weight: 600; color: #1a1a2e; }
   .page-sub { font-size: 13px; color: #718096; margin-top: 2px; }
   .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; font-size: 13px; font-weight: 500; border-radius: 7px; border: none; cursor: pointer; transition: all 0.15s; }
   .btn-primary { background: #0db14b; color: #fff; }
@@ -104,20 +104,30 @@
   .view-tab.active span { background:#0db14b; color:#fff; }
 
   /* QUOTE DETAIL */
-  .qd-back { display:inline-flex; align-items:center; gap:6px; font-size:13px; color:#0db14b; cursor:pointer; margin-bottom:18px; font-weight:500; background:none; border:none; padding:0; }
+input[type="checkbox"] { width:16px; height:16px; cursor:pointer; accent-color:#4f8ef7; vertical-align:middle; flex-shrink:0; }
+  .type-req-cb { width:16px !important; height:16px !important; }
+  .parts-table input[type="text"], .parts-table input[type="number"] { width:100%; border:0.5px solid #e2e5ea; border-radius:4px; padding:4px 6px; font-size:13px; color:#2d3748; background:#fff; outline:none; box-sizing:border-box; }
+  .parts-table input[type="text"]:focus, .parts-table input[type="number"]:focus { border-color:#0db14b; }
+  .parts-table input[type="number"] { -moz-appearance:textfield; }
+  .parts-table input[type="number"]::-webkit-outer-spin-button, .parts-table input[type="number"]::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
+  .add-notes-btn { font-size:11px; font-weight:600; color:#0db14b; border:0.5px solid #0db14b; background:#fff; border-radius:4px; padding:4px 10px; cursor:pointer; white-space:nowrap; }
+  .add-notes-btn:hover { background:#f0faf4; }
+  .qd-back { display:inline-flex; align-items:center; gap:6px; font-size:13px; color:#0db14b; cursor:pointer; margin-bottom:16px; font-weight:500; background:none; border:none; padding:0; vertical-align:middle; }
   .qd-back:hover { text-decoration:underline; }
-  .qd-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; border:0.5px solid #e2e5ea; border-radius:8px; overflow:hidden; }
-  .qd-panel { border-right:0.5px solid #e2e5ea; }
+  .qd-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; }
+  .qd-panel { background:transparent; border-right:0.5px solid #e2e5ea; padding:0 24px 20px; }
+  .qd-panel:first-child { padding-left:0; }
   .qd-panel:last-child { border-right:none; }
-  .qd-panel-head { background:none; color:#1a1a2e; font-weight:600; font-size:20px; padding:8px 14px 4px; }
-  .qd-panel-body { padding:16px 14px; }
-  .qd-row { display:flex; flex-direction:column; gap:3px; margin-bottom:12px; font-size:13px; }
+  .qd-panel-head { color:#718096; font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:0.5px; padding:0 0 8px; margin-bottom:14px; border-bottom:0.5px solid #e2e5ea; }
+  .qd-panel-body { padding:0; }
+  .qd-row { display:flex; flex-direction:column; gap:6px; margin-bottom:16px; font-size:13px; }
   .qd-row:last-child { margin-bottom:0; }
-  .qd-label { font-weight:600; color:#718096; font-size:11px; text-transform:uppercase; letter-spacing:0.4px; }
+  .qd-label { font-weight:600; color:#1a1a2e; font-size:13px; }
   .qd-val { color:#333; font-size:16px; }
   .qd-input { border:0.5px solid #e2e5ea; padding:3px 6px; font-size:13px; font-family:'Open Sans',sans-serif; width:120px; border-radius:4px; }
-  .qd-select { border:0.5px solid #e2e5ea; padding:3px 6px; font-size:13px; font-family:'Open Sans',sans-serif; border-radius:4px; }
-  .qd-optional-head { background:none; color:#1a1a2e; font-weight:600; font-size:20px; padding:8px 0 4px; margin-top:14px; }
+  select { appearance:none; -webkit-appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cpath fill='%231a1a2e' d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:calc(100% - 10px) center; background-color:#fff; }
+  .qd-select { border:0.5px solid #e2e5ea; padding:3px 28px 3px 6px; font-size:13px; font-family:'Open Sans',sans-serif; border-radius:4px; }
+  .qd-optional-head { color:#718096; font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:0.5px; padding:0 0 8px; margin:18px 0 14px; border-bottom:0.5px solid #e2e5ea; }
   .qd-checkbox-row { display:flex; align-items:center; gap:6px; font-size:12px; color:#444; font-style:italic; margin-top:8px; }
 
   /* QUICK ACCESS */
@@ -305,34 +315,43 @@
 
 </div><!-- end page-quotes -->
 
-<div class="page" id="page-quote-detail" style="display:none;padding:10px 24px 28px;">
+<div class="page" id="page-quote-detail" style="display:none;padding:16px 24px 28px;">
   <button class="qd-back" onclick="showPage('quotes')">
     <span class="material-symbols-outlined" style="font-size:16px;">arrow_back</span> Back to Quotes
   </button>
-  <div style="margin-bottom:20px;">
-    <div class="page-title">Quote Details</div>
-    <div class="page-sub">View and manage the full details for this quote request</div>
-  </div>
-  <div style="background:#fff;border-radius:10px;border:0.5px solid #e2e5ea;padding:24px;">
+  <div style="background:#fff;border-radius:10px;border:0.5px solid #e2e5ea;overflow:hidden;">
+  <div style="font-size:1.25rem;font-weight:600;color:#1a1a2e;background:#f8fafc;padding:10px 24px;border-bottom:0.5px solid #e2e5ea;">Quote Details</div>
+  <div style="padding:24px;">
 
-    <!-- Top 3-col summary strip -->
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:0.5px solid #e2e5ea;border-radius:8px;overflow:hidden;margin-bottom:24px;">
-      <div style="padding:16px 20px;border-right:0.5px solid #e2e5ea;">
-        <div style="font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px;">Quote No</div>
-        <div style="font-size:20px;font-weight:600;color:#1a1a2e;" id="qd-quote-nr-display"></div>
-      </div>
-      <div style="padding:16px 20px;border-right:0.5px solid #e2e5ea;">
-        <div style="font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px;">Quote Status</div>
-        <span class="status-pill s-approved" style="font-size:13px;">Opened</span>
-      </div>
-      <div style="padding:16px 20px;">
-        <div style="font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px;">Request Type</div>
-        <div style="font-size:16px;font-weight:600;color:#2d3748;">Direct Purchase</div>
-        <div style="font-size:12px;color:#718096;">Supply: 11/03/2026</div>
-      </div>
+  <!-- Quote summary row -->
+  <div style="display:flex;align-items:stretch;margin-bottom:0;padding-bottom:20px;border-bottom:0.5px solid #e2e5ea;">
+    <div class="qd-row" style="margin-bottom:0;padding-right:32px;">
+      <span class="qd-label">Quote No</span>
+      <div style="font-size:18px;font-weight:700;color:#1a1a2e;" id="qd-quote-nr-display">#10821</div>
     </div>
+    <div style="width:0.5px;background:#e2e5ea;margin:0 32px 0 0;"></div>
+    <div class="qd-row" style="margin-bottom:0;padding-right:32px;">
+      <span class="qd-label">Quote Expiry</span>
+      <input type="date" value="2026-04-27" style="border:0.5px solid #e2e5ea;border-radius:4px;padding:3px 6px;font-size:13px;font-family:'Open Sans',sans-serif;color:#2d3748;outline:none;">
+    </div>
+    <div style="width:0.5px;background:#e2e5ea;margin:0 32px 0 0;"></div>
+    <div class="qd-row" style="margin-bottom:0;padding-right:32px;">
+      <span class="qd-label">Required By</span>
+      <div class="qd-val">11/03/2026 <span style="font-size:12px;color:#718096;">9:00 AM</span></div>
+    </div>
+    <div style="width:0.5px;background:#e2e5ea;margin:0 32px 0 0;"></div>
+    <div class="qd-row" style="margin-bottom:0;padding-right:32px;">
+      <span class="qd-label">Order Status</span>
+      <span class="status-pill s-pending" style="font-size:13px;padding:2px 10px;line-height:1.2;align-self:flex-start;">Late Submission</span>
+    </div>
+    <div style="width:0.5px;background:#e2e5ea;margin:0 32px 0 0;"></div>
+    <div class="qd-row" style="margin-bottom:0;">
+      <span class="qd-label">Quote Status</span>
+      <span class="status-pill s-approved" style="font-size:13px;padding:2px 10px;line-height:1.2;align-self:flex-start;">Opened</span>
+    </div>
+  </div>
 
-  <div class="qd-grid">
+  <div class="qd-grid" style="margin-top:0;padding-top:20px;">
 
     <!-- General Info -->
     <div class="qd-panel">
@@ -340,13 +359,17 @@
       <div class="qd-panel-body">
         <div class="qd-row">
           <span class="qd-label">Purchaser</span>
-          <div class="qd-val" id="qd-purchaser-block">
-            FlexiQuote Systems<br>15 Ellen St<br>Logan Central, QLD<br>Ph: 07 38082170
+          <div id="qd-purchaser-block">
+            <div class="qd-val">FlexiQuote Systems<br>15 Ellen St<br>Logan Central, QLD</div>
+            <div class="qd-row" style="margin-top:16px;">
+              <span class="qd-label">Phone</span>
+              <div class="qd-val">07 38082170</div>
+            </div>
           </div>
         </div>
         <div class="qd-row">
           <span class="qd-label">Estimator</span>
-          <span class="qd-val">Uma</span>
+          <span class="qd-val">Karen Carpenter</span>
         </div>
         <div class="qd-row">
           <span class="qd-label">Reference</span>
@@ -359,45 +382,166 @@
     <div class="qd-panel">
       <div class="qd-panel-head">Vehicle Info</div>
       <div class="qd-panel-body">
-        <div class="qd-row"><span class="qd-label">Make</span><span class="qd-val">Toyota</span></div>
-        <div class="qd-row"><span class="qd-label">Model</span><span class="qd-val">Corolla</span></div>
-        <div class="qd-row"><span class="qd-label">Model Nr</span><span class="qd-val"></span></div>
-        <div class="qd-row"><span class="qd-label">Series</span><span class="qd-val"></span></div>
-        <div class="qd-row"><span class="qd-label">Trans</span><span class="qd-val">A</span></div>
-        <div class="qd-row"><span class="qd-label">Colour</span><span class="qd-val">Mat Red</span></div>
-        <div class="qd-row"><span class="qd-label">VIN</span><span class="qd-val">MR053REH205309076</span></div>
-        <div class="qd-row"><span class="qd-label">Body</span><span class="qd-val">4 DOOR Sedan 4Door</span></div>
-        <div class="qd-row"><span class="qd-label">Mth/Yr</span><span class="qd-val">1/2025</span></div>
-        <div class="qd-row"><span class="qd-label">Veh Reg</span><span class="qd-val">55FHR</span></div>
-        <div class="qd-row"><span class="qd-label">Claim Nr</span><span class="qd-val">NRP05456200</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 12px;">
+          <div class="qd-row"><span class="qd-label">Make</span><span class="qd-val">Toyota</span></div>
+          <div class="qd-row"><span class="qd-label">Model</span><span class="qd-val">Corolla</span></div>
+          <div class="qd-row"><span class="qd-label">Model No.</span><span class="qd-val">--</span></div>
+          <div class="qd-row"><span class="qd-label">Series</span><span class="qd-val">--</span></div>
+          <div class="qd-row"><span class="qd-label">Trans</span><span class="qd-val">--</span></div>
+          <div class="qd-row"><span class="qd-label">Colour</span><span class="qd-val">Mat Red</span></div>
+          <div class="qd-row"><span class="qd-label">Body</span><span class="qd-val">4 DOOR Sedan</span></div>
+          <div class="qd-row"><span class="qd-label">Mth/Yr</span><span class="qd-val">1/2025</span></div>
+          <div class="qd-row"><span class="qd-label">Veh Reg</span><span class="qd-val">55FHR</span></div>
+          <div class="qd-row"><span class="qd-label">Claim Nr</span><span class="qd-val">NRP05456200</span></div>
+          <div class="qd-row" style="grid-column:1/-1;"><span class="qd-label">VIN</span><span class="qd-val">MR053REH205309076</span></div>
+        </div>
       </div>
     </div>
 
     <!-- Required Info -->
     <div class="qd-panel">
-      <div class="qd-panel-head">Required Info</div>
       <div class="qd-panel-body">
-        <div class="qd-row"><span class="qd-label">Quote Nr</span><input class="qd-input" id="qd-quote-nr" type="text"></div>
-        <div class="qd-row"><span class="qd-label">Quote Expiry</span><input class="qd-input" type="text" value="27/04/2026"></div>
-        <div class="qd-row">
-          <span class="qd-label">Est. Delivery</span>
-          <select class="qd-select"><option>Next Day</option><option>2-3 Days</option><option>3-5 Days</option><option>1 Week+</option></select>
-        </div>
-        <div class="qd-checkbox-row"><input type="checkbox"> Set above estimate delivery as Default</div>
-        <div class="qd-optional-head">Optional Info</div>
+        <div class="qd-optional-head" style="margin-top:0;">Optional Info</div>
         <div style="padding-top:12px;">
           <div class="qd-row"><span class="qd-label">Internal Status</span><select class="qd-select"><option>API Assigned</option><option>In Progress</option><option>Complete</option></select></div>
-          <div class="qd-row"><span class="qd-label">Sales Rep 🖊</span><select class="qd-select"><option>Not Selected</option><option>Jordan Mills</option></select></div>
-          <div class="qd-row"><span class="qd-label">Est. Freight</span><input class="qd-input" type="text" style="width:80px;"></div>
-          <div class="qd-row"><span class="qd-label">Settlement %</span><input class="qd-input" type="text" value="0.00" style="width:80px;"></div>
+          <div class="qd-row"><span class="qd-label">Sales Rep</span><select class="qd-select"><option>Not Selected</option><option>Jordan Mills</option></select></div>
+          <div class="qd-row">
+            <div style="display:flex;gap:16px;">
+              <div style="flex:1;display:flex;flex-direction:column;gap:6px;"><span class="qd-label">Est. Freight</span><input class="qd-input" type="text" style="width:100%;"></div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:6px;"><span class="qd-label">Settlement %</span><input class="qd-input" type="text" value="0.00" style="width:100%;"></div>
+            </div>
+          </div>
           <div style="font-size:12px;color:#0000cc;text-decoration:underline;cursor:pointer;margin-top:-4px;">What is this?</div>
-          <div class="qd-row" style="margin-top:10px;"><span class="qd-label">Take Ownership</span><input type="checkbox"></div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:10px;"><input type="checkbox"><span class="qd-label">Take Ownership</span></div>
         </div>
       </div>
     </div>
 
-  </div>
-  </div><!-- end white box -->
+  </div><!-- end qd-grid -->
+  </div><!-- end content padding -->
+  </div><!-- end quote info box -->
+
+  <!-- Parts section -->
+  <div style="margin-top:32px;background:#fff;border-radius:10px;border:0.5px solid #e2e5ea;overflow:hidden;">
+    <div style="font-size:1.25rem;font-weight:600;color:#1a1a2e;background:#f8fafc;padding:10px 24px;border-bottom:0.5px solid #e2e5ea;">Parts</div>
+    <div style="padding:24px;">
+    <!-- Parts filter bar -->
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+      <span style="font-size:12px;font-weight:600;color:#718096;white-space:nowrap;">Set All Est. Delivery:</span>
+      <select id="parts-delivery-filter" class="qd-select" style="font-size:12px;" onchange="
+        const val = this.value;
+        document.querySelectorAll('.parts-delivery-sel').forEach(s => s.value = val);
+      ">
+        <option value="">Select</option>
+        <option>Next Day</option>
+        <option>2-3 Days</option>
+        <option>3-5 Days</option>
+        <option>1 Week+</option>
+      </select>
+    </div>
+    <div style="margin-top:0;">
+      <div class="parts-table" style="border:0.5px solid #e2e5ea;border-radius:8px;overflow:hidden;">
+        <table style="width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed;">
+          <colgroup>
+            <col style="width:3%">
+            <col style="width:19%">
+            <col style="width:10%">
+            <col style="width:5%">
+            <col style="width:11%">
+            <col style="width:11%">
+            <col style="width:14%">
+            <col style="width:9%">
+            <col style="width:10%">
+            <col style="width:5%">
+          </colgroup>
+          <thead>
+            <tr style="background:#f8fafc;">
+              <th style="padding:10px 12px;text-align:center;border-bottom:0.5px solid #e2e5ea;"><input type="checkbox" id="parts-select-all" onchange="document.querySelectorAll('.parts-row-cb').forEach(cb=>cb.checked=this.checked)"></th>
+              <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;border-bottom:0.5px solid #e2e5ea;">Description</th>
+              <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;border-bottom:0.5px solid #e2e5ea;">Part Number</th>
+              <th style="padding:10px 4px;text-align:center;font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;border-bottom:0.5px solid #e2e5ea;">QTY</th>
+              <th style="padding:10px 14px;text-align:right;font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;border-bottom:0.5px solid #e2e5ea;">Total List ex GST</th>
+              <th style="padding:10px 14px;text-align:right;font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;border-bottom:0.5px solid #e2e5ea;">Total Buy ex GST</th>
+              <th style="padding:10px 14px;text-align:center;font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;border-bottom:0.5px solid #e2e5ea;">
+                <div>Type Request</div>
+                <div style="display:flex;justify-content:center;gap:14px;margin-top:4px;">
+                  <span style="font-size:10px;font-weight:600;color:#718096;text-transform:uppercase;display:inline-block;width:28px;text-align:center;">OEM</span>
+                  <span style="font-size:10px;font-weight:600;color:#718096;text-transform:uppercase;display:inline-block;width:28px;text-align:center;">USE</span>
+                  <span style="font-size:10px;font-weight:600;color:#718096;text-transform:uppercase;display:inline-block;width:28px;text-align:center;">AFT</span>
+                  <span style="font-size:10px;font-weight:600;color:#718096;text-transform:uppercase;display:inline-block;width:28px;text-align:center;">REC</span>
+                </div>
+              </th>
+              <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;border-bottom:0.5px solid #e2e5ea;">Est. Delivery</th>
+              <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;border-bottom:0.5px solid #e2e5ea;">Notes</th>
+              <th style="padding:10px 14px;text-align:center;font-size:11px;font-weight:600;color:#718096;text-transform:uppercase;letter-spacing:0.4px;border-bottom:0.5px solid #e2e5ea;">Alt</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:8px 12px;border-bottom:0.5px solid #f0f2f5;text-align:center;"><input type="checkbox" class="parts-row-cb"></td>
+              <td style="padding:8px 14px;border-bottom:0.5px solid #f0f2f5;color:#2d3748;">Front Brake Pad Set</td>
+              <td style="padding:8px 14px;border-bottom:0.5px solid #f0f2f5;"><input type="text" value="DB1234"></td>
+              <td style="padding:8px 4px;border-bottom:0.5px solid #f0f2f5;text-align:center;"><input type="number" value="2" min="0" style="text-align:center;width:40px;margin:0 auto;display:block;"></td>
+              <td style="padding:8px 14px;border-bottom:0.5px solid #f0f2f5;"><input type="text" value="$120.00" style="text-align:right;"></td>
+              <td style="padding:8px 14px;border-bottom:0.5px solid #f0f2f5;"><input type="text" value="$84.00" style="text-align:right;"></td>
+              <td style="padding:10px 14px;border-bottom:0.5px solid #f0f2f5;text-align:center;">
+                <div style="display:flex;justify-content:center;gap:14px;">
+                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb" checked></span>
+                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb"></span>
+                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb"></span>
+                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb"></span>
+                </div>
+              </td>
+              <td style="padding:8px 8px;border-bottom:0.5px solid #f0f2f5;"><select class="parts-delivery-sel" style="width:100%;border:0.5px solid #e2e5ea;border-radius:4px;padding:4px 28px 4px 6px;font-size:12px;color:#2d3748;outline:none;font-family:'Open Sans',sans-serif;"><option value="">Select</option><option>Next Day</option><option>2-3 Days</option><option>3-5 Days</option><option>1 Week+</option></select></td>
+              <td style="padding:8px 14px;border-bottom:0.5px solid #f0f2f5;"><button class="add-notes-btn">+ Add Notes</button></td>
+              <td style="padding:12px 14px;border-bottom:0.5px solid #f0f2f5;text-align:center;"><input type="checkbox"></td>
+            </tr>
+            <tr>
+              <td style="padding:8px 12px;border-bottom:0.5px solid #f0f2f5;text-align:center;"><input type="checkbox" class="parts-row-cb"></td>
+              <td style="padding:8px 14px;border-bottom:0.5px solid #f0f2f5;color:#2d3748;">Brake Rotor Front</td>
+              <td style="padding:8px 14px;border-bottom:0.5px solid #f0f2f5;"><input type="text" value="BR5567"></td>
+              <td style="padding:8px 4px;border-bottom:0.5px solid #f0f2f5;text-align:center;"><input type="number" value="2" min="0" style="text-align:center;width:40px;margin:0 auto;display:block;"></td>
+              <td style="padding:8px 14px;border-bottom:0.5px solid #f0f2f5;"><input type="text" value="$210.00" style="text-align:right;"></td>
+              <td style="padding:8px 14px;border-bottom:0.5px solid #f0f2f5;"><input type="text" value="$147.00" style="text-align:right;"></td>
+              <td style="padding:10px 14px;border-bottom:0.5px solid #f0f2f5;text-align:center;">
+                <div style="display:flex;justify-content:center;gap:14px;">
+                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb"></span>
+                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb"></span>
+                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb" checked></span>
+                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb"></span>
+                </div>
+              </td>
+              <td style="padding:8px 8px;border-bottom:0.5px solid #f0f2f5;"><select class="parts-delivery-sel" style="width:100%;border:0.5px solid #e2e5ea;border-radius:4px;padding:4px 28px 4px 6px;font-size:12px;color:#2d3748;outline:none;font-family:'Open Sans',sans-serif;"><option value="">Select</option><option>Next Day</option><option>2-3 Days</option><option>3-5 Days</option><option>1 Week+</option></select></td>
+              <td style="padding:8px 14px;border-bottom:0.5px solid #f0f2f5;"><button class="add-notes-btn">+ Add Notes</button></td>
+              <td style="padding:12px 14px;border-bottom:0.5px solid #f0f2f5;text-align:center;"><input type="checkbox"></td>
+            </tr>
+            <tr>
+              <td style="padding:8px 12px;text-align:center;"><input type="checkbox" class="parts-row-cb"></td>
+              <td style="padding:8px 14px;color:#2d3748;">Caliper Bolt Kit</td>
+              <td style="padding:8px 14px;"><input type="text" value="CK0091"></td>
+              <td style="padding:8px 4px;text-align:center;"><input type="number" value="1" min="0" style="text-align:center;width:40px;margin:0 auto;display:block;"></td>
+              <td style="padding:8px 14px;"><input type="text" value="$28.00" style="text-align:right;"></td>
+              <td style="padding:8px 14px;"><input type="text" value="$19.60" style="text-align:right;"></td>
+              <td style="padding:10px 14px;text-align:center;">
+                <div style="display:flex;justify-content:center;gap:14px;">
+                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb" checked></span>
+                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb"></span>
+                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb"></span>
+                  <span style="display:inline-flex;justify-content:center;width:28px;"><input type="checkbox" class="type-req-cb"></span>
+                </div>
+              </td>
+              <td style="padding:8px 8px;"><select class="parts-delivery-sel" style="width:100%;border:0.5px solid #e2e5ea;border-radius:4px;padding:4px 28px 4px 6px;font-size:12px;color:#2d3748;outline:none;font-family:'Open Sans',sans-serif;"><option value="">Select</option><option>Next Day</option><option>2-3 Days</option><option>3-5 Days</option><option>1 Week+</option></select></td>
+              <td style="padding:8px 14px;"><button class="add-notes-btn">+ Add Notes</button></td>
+              <td style="padding:12px 14px;text-align:center;"><input type="checkbox"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    </div>
+    </div><!-- end parts padding -->
+  </div><!-- end parts box -->
 </div><!-- end page-quote-detail -->
 
 <div class="page" id="page-orders" style="display:none">
@@ -476,7 +620,7 @@ const iconWarn  = `<span class="material-symbols-outlined" style="font-size:20px
 let currentTabData = [];
 
 const tabData = {
-  get all() { return [...this.new, ...this.open, ...this.submitted]; },
+  get all() { return [...this.new, ...this.open]; },
   new: [
     { due:'Apr 15, 2026', quote:'#10821', purchaser:'City Auto Repairs',      status:'<span class="status-pill s-approved">New</span>', icons:[1,1,0,1] },
     { due:'Apr 10, 2026', quote:'#10820', purchaser:'FastFit Mechanical',     status:'<span class="status-pill s-approved">New</span>', icons:[1,1,1,1] },
@@ -552,7 +696,7 @@ function showPage(name) {
 function openQuoteDetail(quoteNum, purchaser) {
   document.getElementById('qd-quote-nr').value = quoteNum.replace('#','');
   document.getElementById('qd-quote-nr-display').textContent = quoteNum;
-  if (purchaser) document.getElementById('qd-purchaser-block').innerHTML = purchaser + '<br>15 Ellen St<br>Logan Central, QLD<br>Ph: 07 38082170';
+  if (purchaser) document.getElementById('qd-purchaser-block').innerHTML = '<div class="qd-val">' + purchaser + '<br>15 Ellen St<br>Logan Central, QLD</div><div style="margin-top:8px;"><span class="qd-label">Phone</span><div class="qd-val">07 38082170</div></div>';
   showPage('quote-detail');
   window.scrollTo(0,0);
 }
