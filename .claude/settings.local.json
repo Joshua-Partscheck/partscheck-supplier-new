@@ -13,7 +13,12 @@
       "Bash(sort -t: -k2 -n)",
       "Skill(update-config)",
       "Skill(update-config:*)",
-      "Bash(xargs grep:*)"
+      "Bash(xargs grep:*)",
+      "Bash(cp \"C:\\\\Users\\\\JoshuaTownsend\\\\Documents\\\\GitHub\\\\partscheck-supplier-new\\\\index.html\" \"C:\\\\Users\\\\JoshuaTownsend\\\\Desktop\\\\index.html\")",
+      "Bash(cp \"C:\\\\Users\\\\JoshuaTownsend\\\\Documents\\\\GitHub\\\\partscheck-supplier-new\\\\logo.svg\" \"C:\\\\Users\\\\JoshuaTownsend\\\\Desktop\\\\logo.svg\")",
+      "Bash(cp \"C:\\\\Users\\\\JoshuaTownsend\\\\Documents\\\\GitHub\\\\partscheck-supplier-new\\\\serve.bat\" \"C:\\\\Users\\\\JoshuaTownsend\\\\Desktop\\\\serve.bat\")",
+      "Bash(cp \"C:\\\\Users\\\\JoshuaTownsend\\\\Documents\\\\GitHub\\\\partscheck-supplier-new\\\\serve.ps1\" \"C:\\\\Users\\\\JoshuaTownsend\\\\Desktop\\\\serve.ps1\")",
+      "Bash(python3 -c ':*)"
     ]
   }
 }

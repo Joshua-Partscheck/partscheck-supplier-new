@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Static HTTP Server",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "serve.bat"],
+      "port": 5500,
+      "autoPort": true
+    }
+  ]
+}
